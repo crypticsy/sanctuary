@@ -14,10 +14,36 @@
 }
 
 @font-face {
-    font-family: comfortaa_r;
-    src: url(../font/comfortaa_regular.ttf);
+    font-family: comfortaa_b;
+    src: url(../font/comfortaa_bold.ttf);
 }
 
+
+
+
+
+
+/* Change the look of scrollbar to custom */
+
+::-webkit-scrollbar {
+    width: 0.8vmax;
+    background-color: #212121;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #474747;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #515151;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #908f8f;
+    border-radius: 50px;
+}
 
 
 
@@ -30,56 +56,25 @@ h1 {
     letter-spacing: 0.8vmax;
 }
 
-
-
-
-
-
-
-#binary-snow {
-    top: 0;
-    left: 0;
-    position: absolute;
-    margin: 0px;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    /* to make the canvas go to the background*/
-}
-
-#main_letter_s{
-    font-family: rAndC;
-    font-size: 7vmax;
-}
-
-#main_title{
-    padding-top: 4vmax;
-}
-
-#caption{
-    color: #a7a7a7;
+h2 {
+    color: white;
     text-align: center;
+    font-family: comfortaa_b;
+    font-size: 1.5vmax;
+    letter-spacing: 0.13vmax;
+    line-height: 3vmax;
+}
+
+p {
+    color: #a7a7a7;
+    text-align: justify;
+    justify-content: baseline;
     font-family: comfortaa_l;
     font-size: 0.9vmax;
+    line-height: 1.5vmax;
 }
 
-#copyright{
-    position:absolute;
-    width:100%;
-    bottom:0;
-    text-align: center;
-    color: #d0d0d0;
-    font-family: comfortaa_l;
-    letter-spacing: 0.1vmax;
-    font-size: 0.7vmax;
-    margin-bottom: 1.5vmax;
-}
-
-#github_link{
-    color:#d0d0d0;
-}
-
-#github_link:hover{
+a:hover {
     text-decoration: none;
 }
 
@@ -87,10 +82,69 @@ h1 {
 
 
 
+
+#binary-snow {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0px;
+    z-index: -1;
+    /* to make the canvas go to the background*/
+}
+
+#main_letter_s {
+    font-family: rAndC;
+    font-size: 7vmax;
+}
+
+#main_title {
+    padding-top: 10vh;
+}
+
+#caption {
+    color: #a7a7a7;
+    text-align: center;
+    font-family: comfortaa_l;
+    font-size: 0.95vmax;
+}
+
+#project_list {
+    color:#d0d0d0;
+    text-align: center;
+    margin-top: 5vmax;
+    margin-left: 10vmax;
+    margin-right: 10vmax;
+}
+
+#copyright {
+    text-align: center;
+    color: #d0d0d0;
+    font-family: comfortaa_l;
+    letter-spacing: 0.1vmax;
+    font-size: 0.5vmax;
+    margin-top: 4vmax;
+    margin-bottom: 1.5vmax;
+}
+
+#github_link {
+    color:#d0d0d0;
+}
+
+
+
+
+
+
 .noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Old versions of Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-  }
+    -webkit-touch-callout: none;        /* iOS Safari */
+    -webkit-user-select: none;          /* Safari */
+    -khtml-user-select: none;           /* Konqueror HTML */
+    -moz-user-select: none;             /* Old versions of Firefox */
+    -ms-user-select: none;              /* Internet Explorer/Edge */
+}
+
+.project {
+    margin-bottom: 3vmax;
+}

@@ -13,9 +13,9 @@
         <meta name="keywords" content="github" />
         <meta name="keywords" content="sanctuary" />
 
-        <link rel="icon" href="./assets">
-        <meta property="og:image" content="./assets">
-        <meta property="og:url" content="">
+        <link rel="icon" href="./assets/images/icon.ico">
+        <meta property="og:image" content="./assets/images/icon.png">
+        <meta property="og:url" content="https://crypticsy.github.io/sanctuary.github.io/">
 
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -25,26 +25,52 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/css/home.css">
 
-        <!--importing external javascript for canvas background snow-->
+        <!--importing external javascript-->
         <script src="./assets/js/snowfall.js"></script>
+        <script src="./assets/js/home.js"></script>
 
-    <head>
+    </head>
 
 
 
-    <body>
-    
+    <body class="noselect">
+
         <canvas id="binary-snow">
             <!-- show this message if the browser does not support canvas -->
             Your browser does not support the HTML canvas tag.
         </canvas>
 
-        <div id="main_title" class="noselect">
+        <div id="main_title">
         
             <h1><span id="main_letter_s">S</span>anctuary</h1>
             <p id="caption">A repository where curiosity and randomness intersects visual augmentation.</p>
         
         </div>
+
+
+
+        <div id="project_list">
+            
+            
+            
+            <div class="project">
+                <h2>Shakespeare Monkey</h2>
+                <p>
+                    
+                    A miniature project that looks into the infinite monkey theorem, which states that a monkey hitting keys at random on a typewriter keyboard 
+                    for an infinite amount of time will almost surely type any given text, such as the complete works of William Shakespeare. &nbsp;
+
+                    <a href="./shakespeare_monkey/shakespeare_monkey.html" target="_blank">
+                        <span style="color:white;" onmouseover="swap_hover(this)" onmouseout="swap(this)">[ &nbsp; View the project . . . &nbsp; ( ●'◡'● ) &nbsp; ]</span>
+                    <a>
+                <p>
+            </div>
+
+
+
+        </div>
+
+
 
         <p id="copyright" class="noselect">© 2021 <a id="github_link" href="https://github.com/crypticsy" target="_blank">Crypticsy</a></p>
 

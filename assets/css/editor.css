@@ -1,0 +1,67 @@
+@font-face {
+    font-family: comfortaa_l;
+    src: url(../font/comfortaa_light.ttf);
+}
+
+@font-face {
+    font-family: comfortaa_b;
+    src: url(../font/comfortaa_bold.ttf);
+}
+
+
+
+
+
+
+body { 
+    margin: 0;
+    background-color: #212121;
+    display: flex;
+    overflow: hidden;
+} 
+
+canvas {
+    margin:0;
+    padding:0;
+}
+
+h1 {
+    font-family: comfortaa_b;
+    font-size: 2.3vmax;
+    line-height: 4.5vmax;
+}
+
+
+
+
+
+
+#right_pannel {
+    width: 50vw;
+    height: 100vh;
+    padding: 4vmax;
+    color:white;
+}
+
+#main_title {
+    padding-bottom: 5vh;
+}
+
+#caption {
+    color: #a7a7a7;
+    text-align: justify;
+    font-family: comfortaa_l;
+    font-size: 0.95vmax;
+}
+
+
+
+
+
+.noselect {
+    -webkit-touch-callout: none;        /* iOS Safari */
+    -webkit-user-select: none;          /* Safari */
+    -khtml-user-select: none;           /* Konqueror HTML */
+    -moz-user-select: none;             /* Old versions of Firefox */
+    -ms-user-select: none;              /* Internet Explorer/Edge */
+}

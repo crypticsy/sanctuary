@@ -1,6 +1,6 @@
 let snowCollection = [];                // array to store all the snow
 let canvas, ctx;                        // cavnas = canvas element, ctx = 2d context of the canvas
-let numberOfSnow = 150;                 //number of snows to show
+let numberOfSnow;                       //number of snows to show
 let fps = 30;                           //the frames per second to render the animation
 
 
@@ -92,6 +92,7 @@ window.onload = function() {
     canvas = document.getElementById("binary-snow");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    numberOfSnow = Math.floor(Math.min((canvas.width * canvas.height)/8000, 100));
 
     // get the 2d context of the canvas
     ctx = canvas.getContext("2d");
