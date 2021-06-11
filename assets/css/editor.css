@@ -8,6 +8,11 @@
     src: url(../font/comfortaa_bold.ttf);
 }
 
+@font-face {
+    font-family: retro_text;
+    src: url(../font/retro_computer.ttf);
+}
+
 
 
 
@@ -18,6 +23,9 @@ body {
     background-color: #212121;
     display: flex;
     overflow: hidden;
+    color:#a7a7a7;
+    font-family: retro_text;
+    font-size: small;
 } 
 
 canvas {
@@ -29,8 +37,51 @@ h1 {
     font-family: comfortaa_b;
     font-size: 2.3vmax;
     line-height: 4.5vmax;
+    color:white
 }
 
+label {
+    font-family:comfortaa_b;
+    color:white;
+}
+
+input {
+    font-family:comfortaa_b;
+    text-decoration: none;
+    line-height: 1.5vmax;
+    color:#d5d5d5;
+    background-color: #4f4f4f;
+    margin-bottom: 1.5vmax;
+    border: 0;
+    width: 20vmax;
+}
+
+input:focus {
+    border: 0;
+    outline: none;
+}
+
+button {
+    border-radius: 0.3vmax;
+    padding-left: 1vmax;
+    padding-right: 1vmax;
+    padding-top: 0.35vmax;
+    padding-bottom: 0.35vmax;
+    border: 0;
+    background-color: #03dc03;
+    color: white;
+    margin-top: 1vmax;
+}
+
+button:hover {
+    background-color: #159b15;
+    color: white;
+}
+
+button:focus {
+    border: 0;
+    outline: none;
+}
 
 
 
@@ -40,7 +91,6 @@ h1 {
     width: 50vw;
     height: 100vh;
     padding: 4vmax;
-    color:white;
 }
 
 #main_title {
@@ -64,4 +114,16 @@ h1 {
     -khtml-user-select: none;           /* Konqueror HTML */
     -moz-user-select: none;             /* Old versions of Firefox */
     -ms-user-select: none;              /* Internet Explorer/Edge */
+}
+
+.canvas_title {
+    font-size: medium;
+    line-height: 2vmax;
+    color:white
+}
+
+
+.canvas_sub_title {
+    line-height: 2vmax;
+    color:#d8d8d8;
 }

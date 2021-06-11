@@ -27,16 +27,16 @@
     <!--importing external javascript-->
     <script language="javascript" type="text/javascript" src="../assets/libraries/p5.min.js"></script>
     <script language="javascript" type="text/javascript" src="shakespeare_monkey.js"></script>
+    <script language="javascript" type="text/javascript" src="Population.js"></script>
+    <script language="javascript" type="text/javascript" src="DNA.js"></script>
 
   </head>
 
 
 
-  <body>
+  <body  class="noselect">
 
-    <div id="right_pannel" class="noselect">
-
-
+    <div id="right_pannel">
 
       <div id="main_title">
         
@@ -50,9 +50,23 @@
       
       </div>
 
+      <form>
+        
+        <label for="target">Phrase:</label><br>
+        <input type="text" id="target" name="target" value="To be or not to be."><br>
+        
+        <label for="nGeneration">Total generation:</label><br>
+        <input type="text" id="nGeneration" name="nGeneration" value="200"><br>
+        
+        <label for="mRate">Mutation Rate:</label><br>
+        <input type="text" id="mRate" name="mRate" value="1"><br>
 
+        <button onclick="saveInput()">Run</button>
+        
+      </form>
 
     </div>
+
     
   </body>
 

@@ -85,7 +85,7 @@ window.onscroll = function() {
 
 
 
-// load the canvas once the page has loaded, else: document.getElementById("binary-snow") reurns null
+// load the canvas once the page has loaded, else: document.getElementById("binary-snow") returns null
 window.onload = function() {
 
     // initialize all global variables and the variables for the canvas
