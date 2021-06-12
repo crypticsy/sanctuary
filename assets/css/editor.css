@@ -40,9 +40,15 @@ h1 {
     color:white
 }
 
+h6{
+    margin-right:2vmax;
+    font-size: 1vmax;
+}
+
 label {
     font-family:comfortaa_b;
     color:white;
+    font-size: 0.8vmax;
 }
 
 input {
@@ -54,6 +60,7 @@ input {
     margin-bottom: 1.5vmax;
     border: 0;
     width: 20vmax;
+    font-size: 0.8vmax;
 }
 
 input:focus {
