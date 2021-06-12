@@ -69,9 +69,9 @@ function setup() {
 
     popmax = sessionStorage.getItem('popmax');
     if (popmax == null){
-        popmax=document.getElementById("nGeneration").value;
+        popmax=document.getElementById("population").value;
     } else{
-        document.getElementById("nGeneration").value = popmax;
+        document.getElementById("population").value = popmax;
     }
 
     mutationRate = sessionStorage.getItem('mutationRate');
@@ -93,7 +93,7 @@ function setup() {
 function draw() {
 
     population.naturalSelection();                // Generate mating pool
-    population.generate();                        //Create next generation
+    population.generate();                        // Create next generation
     population.calcFitness();                     // Calculate fitness
     population.evaluate();
 
@@ -133,7 +133,7 @@ function displayInfo() {
 function saveInput(){
 
     sessionStorage.setItem('phrase', document.getElementById("target").value);
-    sessionStorage.setItem('popmax', document.getElementById("nGeneration").value);
+    sessionStorage.setItem('popmax', document.getElementById("population").value);
     sessionStorage.setItem('mutationRate', parseInt(document.getElementById("mRate").value)/100);
 
 }
