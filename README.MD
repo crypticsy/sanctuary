@@ -8,3 +8,4 @@ A repository where curiosity and randomness intersects visual augmentation. [Vis
 
 - [Kaleidoscope](https://crypticsy.github.io/sanctuary.github.io/kaliedoscope/kaliedoscope.html)
 - [Shakespeare Monkey](https://crypticsy.github.io/sanctuary.github.io/shakespeare_monkey/shakespeare_monkey.html)
+- [Terrain Generation](https://crypticsy.github.io/sanctuary.github.io/terrain_generation/terrain_generation.html)
