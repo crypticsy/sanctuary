@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <title>Kaliedoscope</title>
+
+    <!--Meta Information about the website-->
+    <meta name="author" content="crypticsy" />
+    <meta name="keywords" content="crypticsy" />
+    <meta name="keywords" content="github" />
+    <meta name="keywords" content="sanctuary" />
+
+    <link rel="icon" href="../assets/images/icon.ico">
+    <meta property="og:image" content="../assets/images/icon.png">
+    <meta property="og:url" content="https://crypticsy.github.io/sanctuary.github.io/">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    
+    <!-- Import bootstrap and external CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/editor.css">
+
+    <!--importing external javascript-->
+    <script language="javascript" type="text/javascript" src="../assets/libraries/p5.min.js"></script>
+    <script language="javascript" type="text/javascript" src="kaliedoscope.js"></script>
+
+  </head>
+
+
+
+  <body  class="noselect">
+
+    <div id="left_pannel">
+
+      <div id="main_title">
+        
+        <h1>Kaliedoscope</h1>
+        
+        <p id="caption">
+          A kaleidoscope is an optical apparatus containing two or more reflecting surfaces slanted at an angle to one other, such that when viewed from the 
+          opposite end, one or more objects on one end of the mirrors appear as a regular symmetrical pattern due to repeated reflection.
+        </p>
+
+        <p  id="caption">
+          This project tries to replicate the traits of a kaleidoscope to create symmetrical pattern through user input. 
+            <a id="reference" href="https://p5js.org/examples/interaction-kaleidoscope.html"> [Original]</a> 
+          To create your own piece, interact with the art board to the right through mouse press.
+        </p>
+
+        <p  id="caption">
+          Adjust the brush size with the help of the slider below. The clear button, as labeled, clears the art board to the right. The save button will download 
+          a .png file of the art that you have created.
+        </p>
+      
+      </div>
+
+      <div style="display:flex;">
+
+        <h6 style="margin-right:2vmax;">Brush slider</h6> 
+        <input style="width:5vmax;" type="color" id="brush_color" name="brush_color" value="#242424">
+      
+      </div>
+
+      <div class="slidecontainer">
+          <input id="brush_slider" type="range" min="1" max="30" value="4" class="slider">
+      </div>
+
+      <button onclick="saveFile()">Save</button>
+      <button onclick="clearScreen()">Clear</button>
+
+
+    </div>
+
+    
+  </body>
+
+</html>

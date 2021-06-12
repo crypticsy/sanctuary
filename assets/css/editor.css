@@ -69,8 +69,10 @@ button {
     padding-bottom: 0.35vmax;
     border: 0;
     background-color: #03dc03;
-    color: white;
+    color: black;
     margin-top: 1vmax;
+    margin-right: 1vmax;
+    font-size: 0.8vmax;
 }
 
 button:hover {
@@ -83,11 +85,15 @@ button:focus {
     outline: none;
 }
 
+p {
+    font-size: 0.8vmax;
+}
 
 
 
 
-#right_pannel {
+
+#left_pannel {
     width: 50vw;
     height: 100vh;
     padding: 4vmax;
@@ -104,6 +110,15 @@ button:focus {
     font-size: 0.95vmax;
 }
 
+#reference {
+    font-size: 0.7vmax;
+    color:#acf0ed;
+}
+
+#reference:hover {
+    text-decoration: none;
+}
+
 
 
 
@@ -117,7 +132,7 @@ button:focus {
 }
 
 .canvas_title {
-    font-size: medium;
+    font-size: 1.1vmax;
     line-height: 2vmax;
     color:white
 }
