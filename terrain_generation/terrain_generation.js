@@ -66,7 +66,7 @@ function setup() {
 
 function draw(){
 
-    flying -= 0.25;
+    flying -= 0.15;
 
     var yOff=0;
     for(let x = 0; x < cols; x++){
