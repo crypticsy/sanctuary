@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <title>Circle Packing</title>
+
+    <!--Meta Information about the website-->
+    <meta name="author" content="crypticsy" />
+    <meta name="keywords" content="crypticsy" />
+    <meta name="keywords" content="github" />
+    <meta name="keywords" content="sanctuary" />
+
+    <link rel="icon" href="../assets/images/icon.ico">
+    <meta property="og:image" content="../assets/images/icon.png">
+    <meta property="og:url" content="https://crypticsy.github.io/sanctuary.github.io/">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    
+    <!-- Import bootstrap and external CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/editor.css">
+
+    <!--importing external javascript-->
+    <script language="javascript" type="text/javascript" src="../assets/libraries/p5.min.js"></script>
+    <script language="javascript" type="text/javascript" src="circle_packing.js"></script>
+    <script language="javascript" type="text/javascript" src="Circle.js"></script>
+
+  </head>
+
+
+
+  <body  class="noselect">
+
+    <div id="left_pannel">
+
+      <div id="main_title">
+        
+        <h1>Circle packing</h1>
+        
+        <p id="caption">
+          A circle packing is an arrangement of circles inside a given boundary such that no two overlap and some (or all) of them are mutually tangent.
+          The project covers this feature of circle packing to create artistic drawings from a given picture. You can also upload your own image within the project
+          and save the image to show it to others.
+          <a id="reference" href="https://www.youtube.com/watch?v=ERQcYaaZ6F0" target="_blank"> [Original]</a> 
+        </p>
+
+        <br><br>
+
+        <form>
+          
+          <label for="target">Upload your own image here :</label><br>
+          <input type="file" id="myFile" name="filename">
+          <br>
+
+          <button onclick="fileUpload()">Upload</button>
+          <button onclick="saveFile()">Save</button>
+
+        </form>
+      
+      </div>
+
+
+    </div>
+
+    
+  </body>
+
+</html>
