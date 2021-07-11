@@ -3,12 +3,7 @@ let img;
 let target;
 
 function preload() {
-    target = sessionStorage.getItem('imageUpload');
-    if (target == null){
-        img = loadImage("./assets/monalisa.jpg");
-    } else{
-        img = loadImage(target);
-    }
+    img = loadImage("./assets/monalisa.jpg");
 }
   
 
@@ -99,16 +94,4 @@ function newCircle(){
         return null;
     }
     
-}
-
-
-
-function fileUpload(){
-    sessionStorage.setItem('imageUpload', document.getElementById("myFile").value);   
-}
-
-
-// Save File Function
-function saveFile() {
-    save('circle_packing.png');
 }
