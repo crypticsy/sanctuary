@@ -1,16 +1,64 @@
 let circles = [];
 let img;
 let target;
+let mx, my;
 
 function preload() {
-    img = loadImage("./assets/monalisa.jpg");
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get("url");
+    if (url == null) {
+        img = loadImage("./assets/monalisa.jpg")
+    } else {
+        const cap = document.getElementsByClassName("cap")[0]
+        const p = document.createElement("p");
+        const a = document.createElement("a");
+        p.innerHTML = "The image on the right is generated using circle packing of ";
+        a.innerHTML = "this image";
+        a.href = url;
+        a.target = "#";
+        p.appendChild(a);
+        p.innerHTML += ".";
+        p.id = "caption";
+        cap.removeChild(cap.lastChild);
+        cap.appendChild(p);
+        img = loadImage(url);
+    }
 }
-  
+
+// Save File Function
+function saveFile() {
+    save('circlepacking.png');
+}
+
+function isValidHttpUrl(string) {
+    let url;
+    
+    try {
+      url = new URL(string);
+    } catch (a) {
+        console.log(a);
+      return false;  
+    }
+
+    return url.protocol === "http:" || url.protocol === "https:";
+}
+
+function redirect() {
+    const url = document.getElementById("url").value;
+    console.log(url);
+    if (isValidHttpUrl(url)) {
+        document.location.search = "?url="+url;
+    } else {
+        alert("Enter a valid URL.");
+    }
+}
 
 function setup() { 
     var width = window.innerWidth * 0.5;
     var height = window.innerHeight;
 
+    mx = width / img.width;
+    my = height / img.height;
     createCanvas(width, height);    
 
     img.loadPixels();
@@ -70,13 +118,12 @@ function draw() {
 
 function newCircle(){
     
-    var x = random(width);
-    var y = random(height);
-
+    var x = random(img.width);
+    var y = random(img.height);
     var valid = true;
 
     circles.forEach(function (c) {
-        var d = dist(x, y, c.x, c.y);
+        var d = dist(x*mx, y*my, c.x, c.y);
         if (d < c.r){
             valid=false;
             return;
@@ -89,7 +136,7 @@ function newCircle(){
         var g = img.pixels[index + 1];
         var b = img.pixels[index + 2];
         var c = color(r, g, b);
-        return new Circle(x, y, c);
+        return new Circle(x*mx, y*my, x, y, c);
     }else{
         return null;
     }

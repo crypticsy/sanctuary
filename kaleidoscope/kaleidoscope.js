@@ -1,6 +1,7 @@
 // Symmetry corresponding to the number of reflections. Change the number for different number of reflections 
 let symmetry = 6;   
 let angle = 360 / symmetry;
+let bg = 127;
 
 function setup() { 
     var width = window.innerWidth * 0.5;
@@ -9,7 +10,7 @@ function setup() {
     createCanvas(width, height);
 
     angleMode(DEGREES);
-    background(127);
+    background(bg);
 
 }
 
@@ -20,7 +21,8 @@ function saveFile() {
 
 // Clear Screen function
 function clearScreen() {
-    background(127);
+    let bg = document.getElementById('bg_color').value;
+    background(bg);
 }
 
 function draw() {
@@ -33,6 +35,8 @@ function draw() {
         let pmy = pmouseY - height / 2;
 
         if (mouseIsPressed) {
+            symmetry = document.getElementById('symmetry_slider').value;
+            angle = 360 / symmetry;
             for (let i = 0; i < symmetry; i++) {
                 rotate(angle);
                 let sw = document.getElementById('brush_slider').value;

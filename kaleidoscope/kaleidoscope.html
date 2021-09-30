@@ -59,18 +59,30 @@
       </div>
 
       <div style="display:flex;">
-
         <h6>Brush slider</h6> 
         <input style="width:5vmax;" type="color" id="brush_color" name="brush_color" value="#242424">
-      
       </div>
 
       <div class="slidecontainer">
           <input id="brush_slider" type="range" min="1" max="30" value="4" class="slider">
       </div>
 
+      <div style="display:flex;">
+        <h6>Symmetries slider</h6> 
+      </div>
+    
+      <div class="slidecontainer">
+        <input id="symmetry_slider" type="range" min="2" max="100" value="6" class="slider">
+      </div>
+      <br> 
+
+      <div style="display:flex;">
+        <h6>Background color</h6> 
+        <input style="width:5vmax;" type="color" id="bg_color" name="bg_color" value="#7F7F7F">
+      </div>
+
       <button onclick="saveFile()">Save</button>
-      <button onclick="clearScreen()">Clear</button>
+      <button onclick="clearScreen()">Reset</button>
 
 
     </div>

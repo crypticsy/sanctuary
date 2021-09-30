@@ -47,12 +47,17 @@
           <a id="reference" href="https://www.youtube.com/watch?v=ERQcYaaZ6F0" target="_blank"> [Original]</a> 
         </p>
 
-        <p id="caption">
-          The image on the right is generated using circle packing of the Monalisa painting by Leonardo da Vinci.
+        <p id="caption" class="cap">
+            The image on the right is generated using circle packing of the Monalisa painting by Leonardo da Vinci.
         </p>
 
         <br><br>
-      
+        <label for="target">Image URL:</label><br>
+        <input onfocus="if(this.value == 'Enter Image URL.'){this.value = '';}" type="text" id="url" name="url" value="Enter Image URL."><br>
+        
+        <button onclick="saveFile()">Save</button>
+        <button onclick="redirect()">Create</button>
+
       </div>
 
 

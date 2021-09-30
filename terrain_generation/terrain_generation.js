@@ -1,5 +1,5 @@
 let cols, rows;
-let scale = 20;
+let scale = 15;
 let flying = 0;
 let terrain = [];
 
@@ -66,7 +66,11 @@ function setup() {
 
 function draw(){
 
-    flying -= 0.15;
+    let scale = 40-document.getElementById('population_slider').value;
+    let speed = document.getElementById('speed_slider').value/100;
+    flying -= speed + (0.4-(scale/100));
+    cols = window.innerWidth / scale;
+    rows = window.innerHeight*2.1 / scale;
 
     var yOff=0;
     for(let x = 0; x < cols; x++){
