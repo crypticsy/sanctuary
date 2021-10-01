@@ -1,6 +1,8 @@
 class Circle{
     
-    constructor( x, y, c) {
+    constructor(x, y, sx, sy, c) {
+        this.sx = sx;
+        this.sy = sy;
         this.x = x;
         this.y = y;
         this.r = 1;
