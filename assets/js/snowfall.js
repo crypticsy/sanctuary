@@ -16,7 +16,7 @@ class Snow {
     
     static gravity = 0.5;               // static class variable gravity is same for all particles
     
-    Snow() {
+    constructor() {
         // initialize every class variable to 0 in the constructor
         this.x = 0, this.y = 0;         // x and y are the co-ordinates of this snow
         this.n = 0;                     // number to show 0 or 1
