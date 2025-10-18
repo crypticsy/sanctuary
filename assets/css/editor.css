@@ -93,7 +93,7 @@ button:focus {
 }
 
 p {
-    font-size: 0.8vmax;
+    font-size: 0.2vmax;
 }
 
 
@@ -148,4 +148,24 @@ p {
 .canvas_sub_title {
     line-height: 2vmax;
     color:#d8d8d8;
+}
+
+.back-to-home {
+    display: inline-block;
+    padding: 0.8vmax 1.5vmax;
+    padding-bottom: 0.7vmax;
+    margin-bottom: 2vmax;
+    background-color: #2a2a2a;
+    color: #03dc03;
+    text-decoration: none;
+    font-family: comfortaa_b;
+    font-size: 0.9vmax;
+    border-radius: 0.3vmax;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-to-home:hover {
+    background-color: #03dc03;
+    color: #212121;
+    text-decoration: none;
 }

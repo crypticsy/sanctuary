@@ -19,6 +19,17 @@
 }
 
 
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #212121;
+    overflow-x: hidden;
+    position: relative;
+}
+
+
 
 
 
@@ -83,17 +94,6 @@ a:hover {
 
 
 
-#binary-snow {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0px;
-    z-index: -1;
-    /* to make the canvas go to the background*/
-}
-
 #main_letter_s {
     font-family: rAndC;
     font-size: 7vmax;
@@ -111,11 +111,14 @@ a:hover {
 }
 
 #project_list {
-    color:#d0d0d0;
-    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3vmax;
     margin-top: 5vmax;
     margin-left: 10vmax;
     margin-right: 10vmax;
+    margin-bottom: 5vmax;
+    padding: 0;
 }
 
 #copyright {
@@ -145,6 +148,42 @@ a:hover {
     -ms-user-select: none;              /* Internet Explorer/Edge */
 }
 
-.project {
-    margin-bottom: 3.5vmax;
+.project-card {
+    background-color: #2a2a2a;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.project-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.project-content {
+    padding: 1.5vmax;
+}
+
+.project-content h2 {
+    margin-top: 0;
+    margin-bottom: 1vmax;
+}
+
+.project-content p {
+    margin: 0;
+    line-height: 1.6;
 }

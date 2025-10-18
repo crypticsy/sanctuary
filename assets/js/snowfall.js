@@ -77,22 +77,37 @@ class Snow {
 
 
 
-// this method makes sure that the canvas is always on the background 
+// this method makes sure that the canvas is always on the background
 // without this method, if the user scrolls past a certain point, the actual white background will be revealed
-window.onscroll = function() {
-    resizeCanvas();
-}
+// NOTE: Not needed with position: fixed
+// window.onscroll = function() {
+//     resizeCanvas();
+// }
 
 
 
 // load the canvas once the page has loaded, else: document.getElementById("binary-snow") returns null
 window.onload = function() {
 
+    console.log("Window loaded - initializing snowfall");
+
     // initialize all global variables and the variables for the canvas
     canvas = document.getElementById("binary-snow");
+
+    if (!canvas) {
+        console.error("Canvas element not found!");
+        return;
+    }
+
+    console.log("Canvas element found:", canvas);
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    console.log("Canvas size:", canvas.width, "x", canvas.height);
+
     numberOfSnow = Math.floor(Math.min((canvas.width * canvas.height)/8000, 100));
+    console.log("Number of snow particles:", numberOfSnow);
 
     // get the 2d context of the canvas
     ctx = canvas.getContext("2d");
@@ -103,6 +118,8 @@ window.onload = function() {
 
     // make snow fall down based upon the FPS: frames per second.
     setInterval(makeSnowFall, 1000 / fps);              // 1 sec = time * fps, 1 sec = 1000 ms
+
+    console.log("Snowfall animation started");
 }
 
 
