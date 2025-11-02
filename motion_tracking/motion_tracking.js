@@ -97,7 +97,7 @@ function startUploadedVideo(file) {
         // Video loaded callback
         video.size(videoWidth, videoHeight);
         video.loop();
-        video.volume(0);
+        video.volume(1);
 
         // Show video controls and setup timeline
         document.getElementById('videoControls').classList.add('visible');
@@ -116,6 +116,19 @@ function startUploadedVideo(file) {
 }
 
 function setupVideoControls() {
+    // Volume control
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeLabel = document.getElementById('volumeLabel');
+
+    volumeSlider.addEventListener('input', (e) => {
+        const value = e.target.value;
+        if (video && video.elt) {
+            video.elt.volume = value / 100;
+        }
+        volumeLabel.textContent = value + '%';
+    });
+
+
     // Update timeline as video plays
     const updateTimeline = () => {
         const currentTime = video.elt.currentTime;
