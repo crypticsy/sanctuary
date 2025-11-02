@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <title>Motion Tracking</title>
+
+    <!--Meta Information about the website-->
+    <meta name="author" content="crypticsy" />
+    <meta name="keywords" content="crypticsy" />
+    <meta name="keywords" content="github" />
+    <meta name="keywords" content="sanctuary" />
+
+    <link rel="icon" href="../assets/images/icon.ico">
+    <meta property="og:image" content="../assets/images/icon.png">
+    <meta property="og:url" content="https://crypticsy.github.io/sanctuary.github.io/">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+
+    <!-- Import bootstrap and external CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/editor.css">
+
+    <!--importing external javascript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+    <script language="javascript" type="text/javascript" src="motion_tracking.js"></script>
+
+    <style>
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 0.8vmax;
+            z-index: 10;
+            background: rgba(0,0,0,0.7);
+            padding: 0.5vmax;
+            border-radius: 0.3vmax;
+            color: white;
+            font-family: comfortaa_l;
+        }
+        #videoInput {
+            display: none;
+        }
+        #videoControls {
+            display: none;
+            margin-top: 3vmax;
+        }
+        #videoControls.visible {
+            display: block;
+        }
+        .timeline-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5vmax;
+            margin-bottom: 0.5vmax;
+        }
+        .time-display {
+            font-size: 0.7vmax;
+            color: #a7a7a7;
+            min-width: 8vmax;
+            font-family: comfortaa_l;
+        }
+        #timeline {
+            flex: 1;
+            height: 0.5vmax;
+            background: #4f4f4f;
+            border-radius: 0.3vmax;
+            cursor: pointer;
+            position: relative;
+        }
+        #timeline:hover {
+            background: #6f6f6f;
+        }
+        #progress {
+            height: 100%;
+            background: #03dc03;
+            border-radius: 0.3vmax;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        .playback-controls {
+            display: flex;
+            gap: 0.5vmax;
+            align-items: center;
+        }
+    </style>
+
+  </head>
+
+
+
+  <body class="noselect">
+
+    <div id="left_pannel">
+
+      <a href="../index.html" class="back-to-home">← Back to Home</a>
+
+      <div id="main_title">
+
+        <h1>Motion Tracking</h1>
+
+        <p id="caption">
+          Real-time human pose detection using PoseNet and ml5.js. Track body movements through your camera or upload a video to analyze motion patterns.
+          The visualization creates dynamic nodes around detected keypoints that respond to movement.
+          <a id="reference" href="https://ml5js.org/" target="_blank"> [ml5.js PoseNet]</a>
+        </p>
+
+        <p id="caption" class="cap">
+          Choose between live camera tracking or upload a video file to analyze. The system detects 17 keypoints on the body and creates an artistic visualization with orbiting nodes.
+        </p>
+
+        <br><br>
+        <label>Mode Selection:</label><br>
+
+        <button id="cameraBtn">Camera</button>
+        <button id="uploadBtn">Upload Video</button>
+        <input type="file" id="videoInput" accept="video/*">
+
+        <!-- Video Timeline Controls (only visible for uploaded videos) -->
+        <div id="videoControls">
+          <label>Video Playback:</label><br>
+          <div class="timeline-container">
+            <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+            <div id="timeline">
+              <div id="progress"></div>
+            </div>
+          </div>
+          <div class="playback-controls">
+            <button id="playPauseBtn">Pause</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="info">Loading PoseNet model...</div>
+
+  </body>
+
+</html>
