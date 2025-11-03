@@ -47,19 +47,35 @@ function colorGradient(fadeFraction, rgbColor1, rgbColor2, rgbColor3) {
 
 
 
-function setup() { 
+function setup() {
+    // Responsive canvas sizing
+    var isMobile = window.innerWidth < 768;
+    var width = isMobile ? window.innerWidth : window.innerWidth * 0.5;
+    var height = isMobile ? window.innerHeight * 0.5 : window.innerHeight;
 
-    var width = window.innerWidth * 0.5;
     terrain_w = width*2;
-
-    var height = window.innerHeight;
     terrain_h = height*2.1;
 
-    createCanvas(width, height, WEBGL);
+    var canvas = createCanvas(width, height, WEBGL);
+    canvas.parent('canvas-container');
 
     cols = terrain_w / scale;
     rows = terrain_h / scale;
 
+}
+
+function windowResized() {
+    var isMobile = window.innerWidth < 768;
+    var width = isMobile ? window.innerWidth : window.innerWidth * 0.5;
+    var height = isMobile ? window.innerHeight * 0.5 : window.innerHeight;
+
+    terrain_w = width*2;
+    terrain_h = height*2.1;
+
+    resizeCanvas(width, height);
+
+    cols = terrain_w / scale;
+    rows = terrain_h / scale;
 }
 
 
@@ -69,8 +85,8 @@ function draw(){
     let scale = 40-document.getElementById('population_slider').value;
     let speed = document.getElementById('speed_slider').value/100;
     flying -= speed + (0.4-(scale/100));
-    cols = window.innerWidth / scale;
-    rows = window.innerHeight*2.1 / scale;
+    cols = terrain_w / scale;
+    rows = terrain_h / scale;
 
     var yOff=0;
     for(let x = 0; x < cols; x++){

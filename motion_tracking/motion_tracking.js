@@ -10,12 +10,16 @@ let isUsingCamera = true;
 let videoWidth = 640;
 let videoHeight = 480;
 let isSeeking = false;
+let currentFacingMode = 'user'; // 'user' for front camera, 'environment' for back camera
 
 function setup() {
-    let canvasWidth = window.innerWidth * 0.5;
-    let canvasHeight = window.innerHeight;
+    // Responsive canvas sizing
+    let isMobile = window.innerWidth < 768;
+    let canvasWidth = isMobile ? window.innerWidth : window.innerWidth * 0.5;
+    let canvasHeight = isMobile ? window.innerHeight * 0.5 : window.innerHeight;
 
-    createCanvas(canvasWidth, canvasHeight);
+    let canvas = createCanvas(canvasWidth, canvasHeight);
+    canvas.parent('canvas-container');
 
     // Initialize node data for 17 keypoints
     initializeNodeData();
@@ -25,6 +29,21 @@ function setup() {
 
     // Setup button controls
     setupControls();
+}
+
+function windowResized() {
+    let isMobile = window.innerWidth < 768;
+    let canvasWidth = isMobile ? window.innerWidth : window.innerWidth * 0.5;
+    let canvasHeight = isMobile ? window.innerHeight * 0.5 : window.innerHeight;
+    resizeCanvas(canvasWidth, canvasHeight);
+
+    // Show/hide switch camera button based on screen size and camera usage
+    const switchBtn = document.getElementById('switchCameraBtn');
+    if (isMobile && isUsingCamera) {
+        switchBtn.classList.remove('hidden');
+    } else {
+        switchBtn.classList.add('hidden');
+    }
 }
 
 function initializeNodeData() {
@@ -56,7 +75,7 @@ function initializeNodeData() {
     }
 }
 
-function startCamera() {
+function startCamera(facingMode = 'user') {
     if (video) {
         video.remove();
     }
@@ -67,13 +86,33 @@ function startCamera() {
     poses = [];
     previousPoses = [];
 
+    currentFacingMode = facingMode;
+
     // Hide video controls for camera
     document.getElementById('videoControls').classList.remove('visible');
+
+    // Show switch camera button on mobile
+    const switchBtn = document.getElementById('switchCameraBtn');
+    if (window.innerWidth < 768) {
+        switchBtn.classList.remove('hidden');
+    } else {
+        switchBtn.classList.add('hidden');
+    }
 
     document.getElementById('info').textContent = 'Starting camera...';
     document.getElementById('info').style.display = 'block';
 
-    video = createCapture(VIDEO, videoReady);
+    // Create video constraints for camera selection
+    const constraints = {
+        video: {
+            facingMode: facingMode,
+            width: videoWidth,
+            height: videoHeight
+        },
+        audio: false
+    };
+
+    video = createCapture(constraints, videoReady);
     video.size(videoWidth, videoHeight);
     video.hide();
     isUsingCamera = true;
@@ -89,6 +128,9 @@ function startUploadedVideo(file) {
     modelLoaded = false;
     poses = [];
     previousPoses = [];
+
+    // Hide switch camera button when using uploaded video
+    document.getElementById('switchCameraBtn').classList.add('hidden');
 
     document.getElementById('info').textContent = 'Loading video...';
     document.getElementById('info').style.display = 'block';
@@ -329,9 +371,10 @@ function setupControls() {
     const cameraBtn = document.getElementById('cameraBtn');
     const uploadBtn = document.getElementById('uploadBtn');
     const videoInput = document.getElementById('videoInput');
+    const switchCameraBtn = document.getElementById('switchCameraBtn');
 
     cameraBtn.addEventListener('click', () => {
-        startCamera();
+        startCamera(currentFacingMode);
     });
 
     uploadBtn.addEventListener('click', () => {
@@ -343,6 +386,12 @@ function setupControls() {
         if (file) {
             startUploadedVideo(file);
         }
+    });
+
+    switchCameraBtn.addEventListener('click', () => {
+        // Toggle between front and back camera
+        const newFacingMode = currentFacingMode === 'user' ? 'environment' : 'user';
+        startCamera(newFacingMode);
     });
 }
 

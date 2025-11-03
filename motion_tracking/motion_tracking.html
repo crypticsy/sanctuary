@@ -109,7 +109,7 @@
   </head>
 
   <body class="m-0 bg-[#212121] flex flex-col md:flex-row overflow-hidden text-[#a7a7a7] font-retro text-sm select-none">
-    <div class="w-full md:w-1/2 h-auto md:h-screen p-6 sm:p-8 md:p-10 overflow-y-auto">
+    <div class="w-full md:w-1/2 h-auto max-h-[50vh] md:max-h-screen md:h-screen p-6 sm:p-8 md:p-10 overflow-y-auto">
       <a href="../index.html" class="inline-block px-4 sm:px-5 py-2.5 mb-6 sm:mb-8 bg-[#2a2a2a] text-[#03dc03] no-underline font-comfortaa-bold text-xs sm:text-sm rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
         ← Back to Home
       </a>
@@ -117,7 +117,7 @@
       <div class="pb-6 sm:pb-8">
         <h1 class="font-comfortaa-bold text-lg sm:text-xl md:text-2xl leading-tight text-white mb-5 sm:mb-6">Motion Tracking</h1>
 
-        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm mb-5 leading-relaxed">
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm mb-5 leading-loose">
           Real-time human pose detection using PoseNet and ml5.js. Track body
           movements through your camera or upload a video to analyze motion
           patterns. The visualization creates dynamic nodes around detected
@@ -126,7 +126,7 @@
             [ml5.js PoseNet]</a>
         </p>
 
-        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm mb-8 leading-relaxed">
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm mb-8 leading-loose">
           Choose between live camera tracking or upload a video file to analyze.
           The system detects 17 keypoints on the body and creates an artistic
           visualization with orbiting nodes.
@@ -140,6 +140,9 @@
           </button>
           <button id="uploadBtn" class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#03dc03] text-black text-xs sm:text-sm font-medium hover:bg-[#159b15] hover:text-white transition-colors focus:outline-none">
             Upload Video
+          </button>
+          <button id="switchCameraBtn" class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#2a2a2a] text-[#03dc03] text-xs sm:text-sm font-medium hover:bg-[#3a3a3a] transition-colors focus:outline-none hidden">
+            🔄 Switch Camera
           </button>
         </div>
         <input type="file" id="videoInput" accept="video/*" />
@@ -173,6 +176,10 @@
       </div>
     </div>
 
-    <div id="info">Loading PoseNet model...</div>
+    <!-- Canvas container for p5.js -->
+    <div id="canvas-container" class="w-full md:w-1/2 min-h-[50vh] md:h-screen overflow-auto flex items-center justify-center relative">
+      <div id="info">Loading PoseNet model...</div>
+    </div>
+
   </body>
 </html>

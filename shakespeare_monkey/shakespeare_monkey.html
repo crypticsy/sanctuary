@@ -35,6 +35,38 @@
             font-family: retro_text;
             src: url(../assets/font/retro_computer.ttf);
         }
+
+        /* Style for p5.js text elements */
+        .best, .all, .stats {
+            font-family: 'comfortaa_l', sans-serif;
+            color: #a7a7a7;
+            font-size: 0.65rem;
+            background: rgba(33, 33, 33, 0.9);
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            max-width: calc(100% - 20px);
+            word-wrap: break-word;
+            line-height: 1.4;
+            margin: 0.25rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .best, .all, .stats {
+                font-size: 0.75rem;
+                max-width: none;
+                background: rgba(33, 33, 33, 0.8);
+            }
+        }
+
+        #canvas-container {
+            padding-bottom: 200px;
+        }
+
+        @media (min-width: 768px) {
+            #canvas-container {
+                padding-bottom: 0;
+            }
+        }
     </style>
     <script>
         tailwind.config = {
@@ -62,7 +94,7 @@
 
   <body class="m-0 bg-[#212121] flex flex-col md:flex-row overflow-hidden text-[#a7a7a7] font-retro text-sm select-none">
 
-    <div class="w-full md:w-1/2 h-auto md:h-screen p-6 sm:p-8 md:p-10 overflow-y-auto">
+    <div class="w-full md:w-1/2 h-auto max-h-[50vh] md:max-h-screen md:h-screen p-6 sm:p-8 md:p-10 overflow-y-auto">
 
       <a href="../index.html" class="inline-block px-4 sm:px-5 py-2.5 mb-6 sm:mb-8 bg-[#2a2a2a] text-[#03dc03] no-underline font-comfortaa-bold text-xs sm:text-sm rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
         ← Back to Home
@@ -72,7 +104,7 @@
 
         <h1 class="font-comfortaa-bold text-lg sm:text-xl md:text-2xl leading-tight text-white mb-5 sm:mb-6">Shakespeare Monkey</h1>
 
-        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm mb-8 leading-relaxed">
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm mb-8 leading-loose">
           A miniature project that looks into the infinite monkey theorem, which states that a monkey hitting keys at random on a typewriter keyboard
           for an infinite amount of time will almost surely type any given text, such as the complete works of William Shakespeare. The project covers
           the fundamentals of genetic algorithm as well as allows the user to tweak the parameters and view the results in real time.
@@ -100,6 +132,8 @@
 
     </div>
 
+    <!-- Canvas container for p5.js -->
+    <div id="canvas-container" class="w-full md:w-1/2 min-h-[50vh] md:h-screen overflow-auto flex md:items-center md:justify-center items-start justify-start relative"></div>
 
   </body>
 

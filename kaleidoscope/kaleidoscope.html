@@ -60,7 +60,7 @@
 
   <body class="m-0 bg-[#212121] flex flex-col md:flex-row overflow-hidden text-[#a7a7a7] font-retro text-sm select-none">
 
-    <div class="w-full md:w-1/2 h-auto md:h-screen p-6 sm:p-8 md:p-10 overflow-y-auto">
+    <div class="w-full md:w-1/2 h-auto max-h-[50vh] md:max-h-screen md:h-screen p-6 sm:p-8 md:p-10 overflow-y-auto">
 
       <a href="../index.html" class="inline-block px-4 sm:px-5 py-2.5 mb-6 sm:mb-8 bg-[#2a2a2a] text-[#03dc03] no-underline font-comfortaa-bold text-xs sm:text-sm rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
         ← Back to Home
@@ -70,15 +70,15 @@
 
         <h1 class="font-comfortaa-bold text-lg sm:text-xl md:text-2xl leading-tight text-white mb-5 sm:mb-6">Kaleidoscope</h1>
 
-        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm mb-5 leading-relaxed">
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm mb-5 leading-loose">
           A kaleidoscope is an optical apparatus containing two or more reflecting surfaces slanted at an angle to one other, such that when viewed from the
           opposite end, one or more objects on one end of the mirrors appear as a regular symmetrical pattern due to repeated reflection.
         </p>
 
-        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm mb-8 leading-relaxed">
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm mb-8 leading-loose">
           This project tries to replicate the traits of a kaleidoscope to create symmetrical pattern through user input.
           <a href="https://p5js.org/examples/interaction-kaleidoscope.html" target="_blank" class="text-xs text-[#acf0ed] no-underline hover:underline"> [Original]</a>
-          To create your own piece, interact with the art board to the right through mouse press.
+          To create your own piece, interact with the art board below through mouse press.
         </p>
 
       </div>
@@ -116,6 +116,8 @@
 
     </div>
 
+    <!-- Canvas container for p5.js -->
+    <div id="canvas-container" class="w-full md:w-1/2 min-h-[50vh] md:h-screen overflow-auto flex items-center justify-center relative"></div>
 
   </body>
 

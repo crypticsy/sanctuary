@@ -41,22 +41,39 @@ let runButton;
 
 
 function setup() {
+    // Responsive canvas sizing
+    var isMobile = window.innerWidth < 768;
+    var width = isMobile ? window.innerWidth : window.innerWidth * 0.5;
+    var height = isMobile ? window.innerHeight * 0.5 : window.innerHeight;
 
-    var width = window.innerWidth * 0.5;
-    var height = window.innerHeight;
-
-    createCanvas(width, height);
+    var canvas = createCanvas(width, height);
+    canvas.parent('canvas-container');
 
     bestPhrase = createP("Best phrase:");
-    bestPhrase.position(width*1.1,height*0.09);
+    if (isMobile) {
+        bestPhrase.parent('canvas-container');
+        bestPhrase.position(10, height + 10);
+    } else {
+        bestPhrase.position(width*1.1, height*0.09);
+    }
     bestPhrase.class("best");
 
     allPhrases = createP("All phrases:");
-    allPhrases.position(width*1.55,height*0.09)
+    if (isMobile) {
+        allPhrases.parent('canvas-container');
+        allPhrases.position(10, height + height*0.2);
+    } else {
+        allPhrases.position(width*1.55, height*0.09);
+    }
     allPhrases.class("all");
 
     stats = createP("Stats");
-    stats.position(width*1.1,height*0.3);
+    if (isMobile) {
+        stats.parent('canvas-container');
+        stats.position(10, height + height*0.4);
+    } else {
+        stats.position(width*1.1, height*0.3);
+    }
     stats.class("stats");
 
 
@@ -88,7 +105,23 @@ function setup() {
 
 }
 
+function windowResized() {
+    var isMobile = window.innerWidth < 768;
+    var width = isMobile ? window.innerWidth : window.innerWidth * 0.5;
+    var height = isMobile ? window.innerHeight * 0.5 : window.innerHeight;
+    resizeCanvas(width, height);
 
+    // Reposition text elements based on mobile/desktop
+    if (isMobile) {
+        bestPhrase.position(10, height + 10);
+        allPhrases.position(10, height + height*0.2);
+        stats.position(10, height + height*0.4);
+    } else {
+        bestPhrase.position(width*1.1, height*0.09);
+        allPhrases.position(width*1.55, height*0.09);
+        stats.position(width*1.1, height*0.3);
+    }
+}
 
 function draw() {
 

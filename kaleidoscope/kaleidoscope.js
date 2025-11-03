@@ -3,15 +3,26 @@ let symmetry = 6;
 let angle = 360 / symmetry;
 let bg = 127;
 
-function setup() { 
-    var width = window.innerWidth * 0.5;
-    var height = window.innerHeight;
+function setup() {
+    // Responsive canvas sizing
+    var isMobile = window.innerWidth < 768;
+    var width = isMobile ? window.innerWidth : window.innerWidth * 0.5;
+    var height = isMobile ? window.innerHeight * 0.5 : window.innerHeight;
 
-    createCanvas(width, height);
+    var canvas = createCanvas(width, height);
+    canvas.parent('canvas-container');
 
     angleMode(DEGREES);
     background(bg);
 
+}
+
+function windowResized() {
+    var isMobile = window.innerWidth < 768;
+    var width = isMobile ? window.innerWidth : window.innerWidth * 0.5;
+    var height = isMobile ? window.innerHeight * 0.5 : window.innerHeight;
+    resizeCanvas(width, height);
+    background(bg);
 }
 
 // Save File Function
