@@ -19,10 +19,36 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="HandheldFriendly" content="true">
-    
-    <!-- Import bootstrap and external CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/editor.css">
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/css">
+        @font-face {
+            font-family: comfortaa_l;
+            src: url(../assets/font/comfortaa_light.ttf);
+        }
+        @font-face {
+            font-family: comfortaa_b;
+            src: url(../assets/font/comfortaa_bold.ttf);
+        }
+        @font-face {
+            font-family: retro_text;
+            src: url(../assets/font/retro_computer.ttf);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comfortaa-light': ['comfortaa_l', 'sans-serif'],
+                        'comfortaa-bold': ['comfortaa_b', 'sans-serif'],
+                        'retro': ['retro_text', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
 
     <!--importing external javascript-->
     <script language="javascript" type="text/javascript" src="../assets/libraries/p5.min.js"></script>
@@ -32,51 +58,50 @@
 
 
 
-  <body  class="noselect">
+  <body class="m-0 bg-[#212121] flex flex-col md:flex-row overflow-hidden text-[#a7a7a7] font-retro text-sm select-none">
 
-    <div id="left_pannel">
+    <div class="w-full md:w-1/2 h-auto md:h-screen p-6 sm:p-8 md:p-10 overflow-y-auto">
 
-      <a href="../index.html" class="back-to-home">← Back to Home</a>
+      <a href="../index.html" class="inline-block px-4 sm:px-5 py-2.5 mb-6 sm:mb-8 bg-[#2a2a2a] text-[#03dc03] no-underline font-comfortaa-bold text-xs sm:text-sm rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+        ← Back to Home
+      </a>
 
-      <div id="main_title">
+      <div class="pb-6 sm:pb-8">
 
-        <h1>Terrain Generation</h1>
-        
-        <p id="caption">
+        <h1 class="font-comfortaa-bold text-lg sm:text-xl md:text-2xl leading-tight text-white mb-5 sm:mb-6">Terrain Generation</h1>
 
-          In computing, procedural generation is a way of producing data algorithmically rather than manually, usually by integrating human-generated assets and 
-          algorithms coupled with computer-generated randomness and processing capacity.Virtual terrains have an important role in computer graphics, and their 
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm mb-5 leading-relaxed">
+          In computing, procedural generation is a way of producing data algorithmically rather than manually, usually by integrating human-generated assets and
+          algorithms coupled with computer-generated randomness and processing capacity.Virtual terrains have an important role in computer graphics, and their
           applications range from landscape design and flight simulators to movies and computer games. A terrain is the dominant visual element of the scene, or
           it plays a central part in the application.
+        </p>
 
-          <br> <br> 
-          
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm mb-8 leading-relaxed">
           While there are various methods of generating terrain, using perlin noise
           is one of the most fundamental method of creating random structure within the terrain.
-
-          <a id="reference" href="https://www.youtube.com/watch?v=IKB1hWWedMk" target="_blank"> [Original]</a> 
-
+          <a href="https://www.youtube.com/watch?v=IKB1hWWedMk" target="_blank" class="text-xs text-[#acf0ed] no-underline hover:underline"> [Original]</a>
         </p>
-        <div style="display:flex;">
-          <h6>Speed slider</h6> 
-        </div>
-      
-        <div class="slidecontainer">
-          <input id="speed_slider" type="range" min="2" max="100" value="15" class="slider">
+
+        <div class="mb-3">
+          <h6 class="text-xs sm:text-sm font-comfortaa-light m-0">Speed slider</h6>
         </div>
 
-
-        <div style="display:flex;">
-          <h6>Population slider</h6> 
+        <div class="mb-6">
+          <input id="speed_slider" type="range" min="2" max="100" value="15" class="w-full h-2 bg-[#4f4f4f] rounded-lg appearance-none cursor-pointer accent-[#03dc03]">
         </div>
-      
-        <div class="slidecontainer">
-          <input id="population_slider" type="range" min="0" max="32" value="20" class="slider">
+
+        <div class="mb-3">
+          <h6 class="text-xs sm:text-sm font-comfortaa-light m-0">Population slider</h6>
+        </div>
+
+        <div class="mb-6">
+          <input id="population_slider" type="range" min="0" max="32" value="20" class="w-full h-2 bg-[#4f4f4f] rounded-lg appearance-none cursor-pointer accent-[#03dc03]">
         </div>
       </div>
 
     </div>
-    
+
   </body>
 
 </html>

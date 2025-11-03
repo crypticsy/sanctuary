@@ -18,76 +18,144 @@
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="HandheldFriendly" content="true">
-        
-        <!-- Import bootstrap and external CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="./assets/css/home.css">
+
+        <!-- TailwindCSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style type="text/css">
+            @font-face {
+                font-family: rAndC;
+                src: url(./assets/font/r&c.otf);
+            }
+            @font-face {
+                font-family: typo;
+                src: url(./assets/font/typo_draft.otf);
+            }
+            @font-face {
+                font-family: comfortaa_l;
+                src: url(./assets/font/comfortaa_light.ttf);
+            }
+            @font-face {
+                font-family: comfortaa_b;
+                src: url(./assets/font/comfortaa_bold.ttf);
+            }
+        </style>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'typo': ['typo', 'sans-serif'],
+                            'randc': ['rAndC', 'sans-serif'],
+                            'comfortaa-light': ['comfortaa_l', 'sans-serif'],
+                            'comfortaa-bold': ['comfortaa_b', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+        </script>
     </head>
 
 
 
-    <body class="noselect">
+    <body class="m-0 p-0 w-full min-h-screen bg-[#212121] overflow-x-hidden select-none">
 
-        <div id="main_title">
-            <h1><span id="main_letter_s">S</span>anctuary</h1>
-            <p id="caption">A repository where curiosity and randomness intersects visual augmentation.</p>
+        <!-- Custom scrollbar styles -->
+        <style>
+            ::-webkit-scrollbar {
+                width: 8px;
+                background-color: #212121;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #474747;
+                border-radius: 50px;
+            }
+            ::-webkit-scrollbar-track {
+                box-shadow: inset 0 0 5px #515151;
+                border-radius: 50px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #908f8f;
+            }
+        </style>
+
+        <div class="pt-12 sm:pt-18 md:pt-20 mb-8 sm:mb-12 md:mb-16">
+            <h1 class="text-white text-center font-typo text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] mb-4 sm:mb-6">
+                <span class="font-randc text-5xl sm:text-6xl md:text-7xl lg:text-8xl">S</span>anctuary
+            </h1>
+            <p class="text-[#a7a7a7] text-center font-comfortaa-light text-xs sm:text-sm md:text-base px-4 mt-4 sm:mt-6">
+                A repository where curiosity and randomness intersects visual augmentation.
+            </p>
         </div>
 
-        <div id="project_list">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 mx-4 sm:mx-8 md:mx-16 lg:mx-24 mb-12 sm:mb-16 md:mb-20">
 
-            <div class="project-card">
-                <a href="./circle_packing/circle_packing.html">
-                    <img src="./assets/images/projects/circle-packing.png" alt="Circle Packing Preview">
-                    <div class="project-content">
-                        <h2>Circle Packing</h2>
-                        <p>A miniature project for converting pictures into artistic paintings by applying circles that bring their own interpretation.</p>
+            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
+                <a href="./circle_packing/circle_packing.html" class="no-underline text-inherit block">
+                    <img src="./assets/images/projects/circle-packing.png" alt="Circle Packing Preview" class="w-full h-40 sm:h-48 object-cover">
+                    <div class="p-4 sm:p-5 md:p-6">
+                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Circle Packing</h2>
+                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm m-0 leading-relaxed">A miniature project for converting pictures into artistic paintings by applying circles that bring their own interpretation.</p>
                     </div>
                 </a>
             </div>
 
-            <div class="project-card">
-                <a href="./kaleidoscope/kaleidoscope.html">
-                    <img src="./assets/images/projects/kaleidoscope.png" alt="Kaleidoscope Preview">
-                    <div class="project-content">
-                        <h2>Kaleidoscope</h2>
-                        <p>A kaleidoscope is an optical apparatus containing two or more reflecting surfaces slanted at an angle to one other. This project tries to replicate the traits of a kaleidoscope to create symmetrical pattern using user input.</p>
+            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
+                <a href="./kaleidoscope/kaleidoscope.html" class="no-underline text-inherit block">
+                    <img src="./assets/images/projects/kaleidoscope.png" alt="Kaleidoscope Preview" class="w-full h-40 sm:h-48 object-cover">
+                    <div class="p-4 sm:p-5 md:p-6">
+                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Kaleidoscope</h2>
+                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm m-0 leading-relaxed">A kaleidoscope is an optical apparatus containing two or more reflecting surfaces slanted at an angle to one other. This project tries to replicate the traits of a kaleidoscope to create symmetrical pattern using user input.</p>
                     </div>
                 </a>
             </div>
 
-            <div class="project-card">
-                <a href="./motion_tracking/motion_tracking.html">
-                    <img src="./assets/images/projects/motion tracking.png" alt="Motion Tracking Preview">
-                    <div class="project-content">
-                        <h2>Motion Tracking</h2>
-                        <p>Real-time human pose detection using PoseNet and ml5.js. Track body movements through your camera or upload a video to analyze motion patterns with dynamic visualizations.</p>
+            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
+                <a href="./motion_tracking/motion_tracking.html" class="no-underline text-inherit block">
+                    <img src="./assets/images/projects/motion tracking.png" alt="Motion Tracking Preview" class="w-full h-40 sm:h-48 object-cover">
+                    <div class="p-4 sm:p-5 md:p-6">
+                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Motion Tracking</h2>
+                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm m-0 leading-relaxed">Real-time human pose detection using PoseNet and ml5.js. Track body movements through your camera or upload a video to analyze motion patterns with dynamic visualizations.</p>
                     </div>
                 </a>
             </div>
 
-            <div class="project-card">
-                <a href="./shakespeare_monkey/shakespeare_monkey.html">
-                    <img src="./assets/images/projects/shakespeare monkey.png" alt="Shakespeare Monkey Preview">
-                    <div class="project-content">
-                        <h2>Shakespeare Monkey</h2>
-                        <p>A miniature project that looks into the infinite monkey theorem, which states that a monkey hitting keys at random on a typewriter keyboard for an infinite amount of time will almost surely type any given text, such as the complete works of William Shakespeare.</p>
+            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
+                <a href="./shakespeare_monkey/shakespeare_monkey.html" class="no-underline text-inherit block">
+                    <img src="./assets/images/projects/shakespeare monkey.png" alt="Shakespeare Monkey Preview" class="w-full h-40 sm:h-48 object-cover">
+                    <div class="p-4 sm:p-5 md:p-6">
+                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Shakespeare Monkey</h2>
+                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm m-0 leading-relaxed">A miniature project that looks into the infinite monkey theorem, which states that a monkey hitting keys at random on a typewriter keyboard for an infinite amount of time will almost surely type any given text, such as the complete works of William Shakespeare.</p>
                     </div>
                 </a>
             </div>
 
-            <div class="project-card">
-                <a href="./terrain_generation/terrain_generation.html">
-                    <img src="./assets/images/projects/terrain generation.png" alt="Terrain Generation Preview">
-                    <div class="project-content">
-                        <h2>Terrain Generation</h2>
-                        <p>A miniature project that creates a 3D procedural terrain using Perlin Noise.</p>
+            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
+                <a href="./terrain_generation/terrain_generation.html" class="no-underline text-inherit block">
+                    <img src="./assets/images/projects/terrain generation.png" alt="Terrain Generation Preview" class="w-full h-40 sm:h-48 object-cover">
+                    <div class="p-4 sm:p-5 md:p-6">
+                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Terrain Generation</h2>
+                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm m-0 leading-relaxed">A miniature project that creates a 3D procedural terrain using Perlin Noise.</p>
                     </div>
                 </a>
             </div>
 
         </div>
 
-        <p id="copyright" class="noselect"> -- Compiled by <a id="github_link" href="https://github.com/crypticsy" target="_blank">Crypticsy</a> -- </p>
+        <p class="text-center text-[#d0d0d0] font-comfortaa-light tracking-wide text-xs sm:text-sm mt-8 sm:mt-12 mb-4 sm:mb-6 select-none">
+            -- &nbsp; Compiled by <a
+            href="https://github.com/crypticsy"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium text-blue-600 dark:text-blue-400 inline-flex items-center gap-2 hover:underline"
+          >
+            Crypticsy
+            <img
+              src="https://github.com/crypticsy.png"
+              alt="Crypticsy GitHub Profile"
+              class="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-gray-300 dark:border-gray-700"
+            />
+          </a> &nbsp; --
+        </p>
 
     </body>
 

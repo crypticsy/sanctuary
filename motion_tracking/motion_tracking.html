@@ -24,12 +24,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="HandheldFriendly" content="true" />
 
-    <!-- Import bootstrap and external CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" type="text/css" href="../assets/css/editor.css" />
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/css">
+        @font-face {
+            font-family: comfortaa_l;
+            src: url(../assets/font/comfortaa_light.ttf);
+        }
+        @font-face {
+            font-family: comfortaa_b;
+            src: url(../assets/font/comfortaa_bold.ttf);
+        }
+        @font-face {
+            font-family: retro_text;
+            src: url(../assets/font/retro_computer.ttf);
+        }
+
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 0.7rem;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            color: white;
+            font-family: comfortaa_l;
+        }
+        #videoInput {
+            display: none;
+        }
+        #videoControls {
+            display: none;
+            margin-top: 1.5rem;
+        }
+        #videoControls.visible {
+            display: block;
+        }
+        #timeline {
+            flex: 1;
+            height: 0.5rem;
+            background: #4f4f4f;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            position: relative;
+        }
+        #timeline:hover {
+            background: #6f6f6f;
+        }
+        #progress {
+            height: 100%;
+            background: #03dc03;
+            border-radius: 0.25rem;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        #volumeSlider {
+            accent-color: #03dc03;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comfortaa-light': ['comfortaa_l', 'sans-serif'],
+                        'comfortaa-bold': ['comfortaa_b', 'sans-serif'],
+                        'retro': ['retro_text', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
 
     <!--importing external javascript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
@@ -39,143 +106,68 @@
       type="text/javascript"
       src="motion_tracking.js"
     ></script>
-
-    <style>
-      #info {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        font-size: 0.8vmax;
-        z-index: 10;
-        background: rgba(0, 0, 0, 0.7);
-        padding: 0.5vmax;
-        border-radius: 0.3vmax;
-        color: white;
-        font-family: comfortaa_l;
-      }
-      #videoInput {
-        display: none;
-      }
-      #videoControls {
-        display: none;
-        margin-top: 3vmax;
-      }
-      #videoControls.visible {
-        display: block;
-      }
-      .timeline-container {
-        display: flex;
-        align-items: center;
-        gap: 0.5vmax;
-        margin-bottom: 0.5vmax;
-      }
-      .time-display {
-        font-size: 0.7vmax;
-        color: #a7a7a7;
-        min-width: 8vmax;
-        font-family: comfortaa_l;
-      }
-      #timeline {
-        flex: 1;
-        height: 0.5vmax;
-        background: #4f4f4f;
-        border-radius: 0.3vmax;
-        cursor: pointer;
-        position: relative;
-      }
-      #timeline:hover {
-        background: #6f6f6f;
-      }
-      #progress {
-        height: 100%;
-        background: #03dc03;
-        border-radius: 0.3vmax;
-        width: 0%;
-        transition: width 0.1s linear;
-      }
-      .playback-controls {
-        display: flex;
-        align-items: center;
-        gap: 0.8vmax;
-      }
-
-      .playback-controls button {
-        font-size: 0.8vmax;
-      }
-
-      #volumeSlider {
-        width: 8vmax;
-        vertical-align: middle;
-        margin: 0;
-        accent-color: #03dc03; /* modern browsers only */
-      }
-
-      #volumeLabel {
-        font-size: 0.7vmax;
-        margin-left: 0.3vmax;
-        min-width: 3vmax;
-        text-align: right;
-      }
-
-      .playback-controls label {
-        font-size: 0.7vmax;
-        margin: 0;
-        vertical-align: middle;
-      }
-    </style>
   </head>
 
-  <body class="noselect">
-    <div id="left_pannel">
-      <a href="../index.html" class="back-to-home">← Back to Home</a>
+  <body class="m-0 bg-[#212121] flex flex-col md:flex-row overflow-hidden text-[#a7a7a7] font-retro text-sm select-none">
+    <div class="w-full md:w-1/2 h-auto md:h-screen p-6 sm:p-8 md:p-10 overflow-y-auto">
+      <a href="../index.html" class="inline-block px-4 sm:px-5 py-2.5 mb-6 sm:mb-8 bg-[#2a2a2a] text-[#03dc03] no-underline font-comfortaa-bold text-xs sm:text-sm rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+        ← Back to Home
+      </a>
 
-      <div id="main_title">
-        <h1>Motion Tracking</h1>
+      <div class="pb-6 sm:pb-8">
+        <h1 class="font-comfortaa-bold text-lg sm:text-xl md:text-2xl leading-tight text-white mb-5 sm:mb-6">Motion Tracking</h1>
 
-        <p id="caption">
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm mb-5 leading-relaxed">
           Real-time human pose detection using PoseNet and ml5.js. Track body
           movements through your camera or upload a video to analyze motion
           patterns. The visualization creates dynamic nodes around detected
           keypoints that respond to movement.
-          <a id="reference" href="https://ml5js.org/" target="_blank">
-            [ml5.js PoseNet]</a
-          >
+          <a href="https://ml5js.org/" target="_blank" class="text-xs text-[#acf0ed] no-underline hover:underline">
+            [ml5.js PoseNet]</a>
         </p>
 
-        <p id="caption" class="cap">
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-xs sm:text-sm mb-8 leading-relaxed">
           Choose between live camera tracking or upload a video file to analyze.
           The system detects 17 keypoints on the body and creates an artistic
           visualization with orbiting nodes.
         </p>
 
-        <br /><br />
-        <label>Mode Selection:</label><br />
+        <label class="font-comfortaa-bold text-white text-xs sm:text-sm block mb-3">Mode Selection:</label>
 
-        <button id="cameraBtn">Camera</button>
-        <button id="uploadBtn">Upload Video</button>
+        <div class="flex flex-wrap gap-3 mb-6">
+          <button id="cameraBtn" class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#03dc03] text-black text-xs sm:text-sm font-medium hover:bg-[#159b15] hover:text-white transition-colors focus:outline-none">
+            Camera
+          </button>
+          <button id="uploadBtn" class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#03dc03] text-black text-xs sm:text-sm font-medium hover:bg-[#159b15] hover:text-white transition-colors focus:outline-none">
+            Upload Video
+          </button>
+        </div>
         <input type="file" id="videoInput" accept="video/*" />
 
         <!-- Video Timeline Controls (only visible for uploaded videos) -->
         <div id="videoControls">
-          <label>Video Playback:</label><br />
-          <div class="timeline-container">
-            <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+          <label class="font-comfortaa-bold text-white text-xs sm:text-sm block mb-3 mt-6">Video Playback:</label>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-xs sm:text-sm text-[#a7a7a7] font-comfortaa-light min-w-[80px]" id="timeDisplay">0:00 / 0:00</span>
             <div id="timeline">
               <div id="progress"></div>
             </div>
           </div>
 
-          <div class="playback-controls">
-            <button id="playPauseBtn">Pause</button>
-            <label for="volumeSlider">Volume:</label>
+          <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+            <button id="playPauseBtn" class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#03dc03] text-black text-xs sm:text-sm font-medium hover:bg-[#159b15] hover:text-white transition-colors focus:outline-none">
+              Pause
+            </button>
+            <label for="volumeSlider" class="text-xs sm:text-sm font-comfortaa-light m-0">Volume:</label>
             <input
               type="range"
               id="volumeSlider"
               min="0"
               max="100"
               value="100"
+              class="w-24 sm:w-32 h-2 bg-[#4f4f4f] rounded-lg appearance-none cursor-pointer"
             />
-            <span id="volumeLabel">100%</span>
+            <span id="volumeLabel" class="text-xs sm:text-sm min-w-[40px] text-right">100%</span>
           </div>
         </div>
       </div>
