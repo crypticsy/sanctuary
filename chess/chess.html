@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Chess Game</title>
+
+    <!--Meta Information about the website-->
+    <meta name="author" content="crypticsy" />
+    <meta name="keywords" content="crypticsy" />
+    <meta name="keywords" content="github" />
+    <meta name="keywords" content="sanctuary" />
+
+    <link rel="icon" href="../assets/images/icon.ico" />
+    <meta property="og:image" content="../assets/images/icon.png" />
+    <meta
+      property="og:url"
+      content="https://crypticsy.github.io/sanctuary.github.io/"
+    />
+
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="true" />
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/css">
+      @font-face {
+        font-family: comfortaa_l;
+        src: url(../assets/font/comfortaa_light.ttf);
+      }
+      @font-face {
+        font-family: comfortaa_b;
+        src: url(../assets/font/comfortaa_bold.ttf);
+      }
+      @font-face {
+        font-family: retro_text;
+        src: url(../assets/font/retro_computer.ttf);
+      }
+
+      /* Fix for mobile viewport height (accounting for browser UI) */
+      :root {
+        --vh: 1vh;
+      }
+    </style>
+    <script>
+      // Calculate and set actual viewport height for mobile browsers
+      function setVH() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
+      }
+      setVH();
+      window.addEventListener("resize", setVH);
+      window.addEventListener("orientationchange", setVH);
+    </script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              "comfortaa-light": ["comfortaa_l", "sans-serif"],
+              "comfortaa-bold": ["comfortaa_b", "sans-serif"],
+              retro: ["retro_text", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!--importing external javascript-->
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="../assets/libraries/p5.min.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="chess.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="ChessBoard.js"
+    ></script>
+  </head>
+
+  <body
+    class="m-0 bg-[#191919] flex flex-col md:flex-row overflow-hidden text-[#a7a7a7] font-retro text-sm select-none"
+  >
+    <div
+      class="w-full md:w-1/2 h-auto md:max-h-screen md:h-screen p-6 sm:p-8 md:p-10 overflow-y-auto"
+      style="max-height: calc(var(--vh, 1vh) * 50)"
+    >
+      <style>
+        @media (min-width: 768px) {
+          .md\:max-h-screen {
+            max-height: 100vh !important;
+          }
+        }
+      </style>
+
+      <a
+        href="../index.html"
+        class="inline-block px-4 sm:px-5 py-2.5 mb-6 sm:mb-8 bg-[#2a2a2a] text-[#03dc03] no-underline font-comfortaa-bold text-xs sm:text-sm rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]"
+      >
+        ← Back to Home
+      </a>
+
+      <div class="pb-6 sm:pb-8">
+        <h1
+          class="font-comfortaa-bold text-lg sm:text-xl md:text-2xl leading-tight text-white mb-5 sm:mb-6"
+        >
+          Chess Game
+        </h1>
+
+        <p
+          class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm mb-5 leading-loose"
+        >
+          A full chess engine with a visual interface. Play against another
+          player, challenge an AI opponent, or watch two AIs battle it out! All
+          standard chess rules are supported including castling, en passant, and
+          pawn promotion. Click on a piece to see valid moves highlighted in
+          green (captures in red), then click on a destination square to make
+          your move.
+        </p>
+
+        <p
+          class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm mb-8 leading-loose"
+        >
+          Ported from the
+          <a
+            href="https://github.com/crypticsy/Playground"
+            target="_blank"
+            class="text-xs text-[#acf0ed] no-underline hover:underline"
+          >
+            original Python version</a
+          >
+          with AI opponent support. The game tracks all moves and detects
+          checkmate and stalemate conditions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <!-- Game Mode Selection -->
+        <div class="mb-6">
+          <h6
+            class="text-xs sm:text-sm font-comfortaa-light m-0 mb-3 text-white"
+          >
+            Game Mode
+          </h6>
+          <div class="flex flex-col gap-2">
+            <label class="flex items-center gap-2 text-xs cursor-pointer">
+              <input
+                type="radio"
+                name="gameMode"
+                value="human-human"
+                checked
+                onchange="setGameMode('human-human')"
+                class="accent-[#03dc03]"
+              />
+              <span class="text-[#a7a7a7]">Human vs Human</span>
+            </label>
+            <label class="flex items-center gap-2 text-xs cursor-pointer">
+              <input
+                type="radio"
+                name="gameMode"
+                value="human-ai"
+                onchange="setGameMode('human-ai')"
+                class="accent-[#03dc03]"
+              />
+              <span class="text-[#a7a7a7]">Human (White) vs AI (Black)</span>
+            </label>
+            <label class="flex items-center gap-2 text-xs cursor-pointer">
+              <input
+                type="radio"
+                name="gameMode"
+                value="ai-human"
+                onchange="setGameMode('ai-human')"
+                class="accent-[#03dc03]"
+              />
+              <span class="text-[#a7a7a7]">AI (White) vs Human (Black)</span>
+            </label>
+            <label class="flex items-center gap-2 text-xs cursor-pointer">
+              <input
+                type="radio"
+                name="gameMode"
+                value="ai-ai"
+                onchange="setGameMode('ai-ai')"
+                class="accent-[#03dc03]"
+              />
+              <span class="text-[#a7a7a7]">AI vs AI</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3 h-12">
+          <button
+            onclick="resetGame()"
+            class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#03dc03] text-black text-xs sm:text-sm font-medium hover:bg-[#159b15] hover:text-white transition-colors focus:outline-none"
+          >
+            Reset Game
+          </button>
+          <button
+            onclick="undoMove()"
+            class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#dc0303] text-white text-xs sm:text-sm font-medium hover:bg-[#9b1515] transition-colors focus:outline-none"
+          >
+            Undo Move
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <!-- Game Status -->
+        <div>
+          <h6
+            class="text-xs sm:text-sm font-comfortaa-light m-0 mb-3 text-white"
+          >
+            Game Status
+          </h6>
+          <p class="text-[#03dc03] text-xs" id="game-status">White's turn</p>
+          <p class="text-[#a7a7a7] text-xs mt-2" id="game-info"></p>
+        </div>
+
+        <!-- Move History -->
+        <div>
+          <h6
+            class="text-xs sm:text-sm font-comfortaa-light m-0 mb-3 text-white"
+          >
+            Move History
+          </h6>
+          <div
+            id="move-history"
+            class="bg-[#2a2a2a] rounded p-3 h-32 overflow-y-auto text-xs font-comfortaa-light"
+          >
+            <p class="text-[#a7a7a7]">No moves yet</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas container for p5.js -->
+    <div
+      id="canvas-container"
+      class="w-full md:w-1/2 md:h-screen overflow-auto flex items-center justify-center relative"
+      style="min-height: calc(var(--vh, 1vh) * 50)"
+    ></div>
+  </body>
+</html>
