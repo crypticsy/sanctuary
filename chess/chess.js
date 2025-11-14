@@ -11,7 +11,7 @@ let gameMode = 'human-human'; // 'human-human', 'human-ai', 'ai-ai'
 let playerWhite = true; // true = human, false = AI
 let playerBlack = true; // true = human, false = AI
 let aiThinking = false;
-let aiMoveDelay = 500; // ms delay before AI moves
+let aiMoveDelay = 800; // ms delay before AI moves (increased for minimax calculation)
 
 function preload() {
   // Load all chess piece images with error handling
@@ -244,30 +244,12 @@ function handleAI() {
 }
 
 function makeAIMove() {
-  // Get all valid moves for all pieces
-  let allMoves = [];
+  // Use the minimax algorithm with alpha-beta pruning from ChessAI.js
+  const bestMove = findBestMove(chessBoard);
 
-  for (let r = 0; r < 8; r++) {
-    for (let c = 0; c < 8; c++) {
-      const piece = chessBoard.getPiece(r, c);
-      if (chessBoard.getPieceColor(piece) === (chessBoard.whiteToMove ? 'w' : 'b')) {
-        const moves = chessBoard.getValidMovesForPiece(r, c);
-        for (let move of moves) {
-          allMoves.push({ from: { row: r, col: c }, to: move });
-        }
-      }
-    }
-  }
-
-  if (allMoves.length > 0) {
-    // Simple AI: pick a random move (or prioritize captures)
-    // Prioritize captures
-    const captures = allMoves.filter(m => m.to.capture);
-    const move = captures.length > 0 ? random(captures) : random(allMoves);
-
-    chessBoard.selectSquare(move.from.row, move.from.col);
-    chessBoard.selectSquare(move.to.row, move.to.col);
-
+  if (bestMove) {
+    chessBoard.selectSquare(bestMove.from.row, bestMove.from.col);
+    chessBoard.selectSquare(bestMove.to.row, bestMove.to.col);
     updateMoveHistory();
   }
 }
@@ -279,22 +261,22 @@ function setGameMode(mode) {
     case 'human-human':
       playerWhite = true;
       playerBlack = true;
-      aiMoveDelay = 500;
+      aiMoveDelay = 800;
       break;
     case 'human-ai':
       playerWhite = true;
       playerBlack = false;
-      aiMoveDelay = 500;
+      aiMoveDelay = 800;
       break;
     case 'ai-human':
       playerWhite = false;
       playerBlack = true;
-      aiMoveDelay = 500;
+      aiMoveDelay = 800;
       break;
     case 'ai-ai':
       playerWhite = false;
       playerBlack = false;
-      aiMoveDelay = 1000; // Slower for AI vs AI so we can watch
+      aiMoveDelay = 1500; // Slower for AI vs AI so we can watch
       break;
   }
 
