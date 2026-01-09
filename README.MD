@@ -7,6 +7,7 @@ A repository where curiosity and randomness intersects visual augmentation. [Vis
 #### Individual Projects
 
 - [Boids](https://crypticsy.github.io/sanctuary/boids/boids.html)
+- [Cellular Automata Caves](https://crypticsy.github.io/sanctuary/cell_automata/cell_automata.html)
 - [Chess](https://crypticsy.github.io/sanctuary/chess/chess.html)
 - [Circle Packing](https://crypticsy.github.io/sanctuary/circle_packing/circle_packing.html)
 - [Kaleidoscope](https://crypticsy.github.io/sanctuary/kaleidoscope/kaleidoscope.html)

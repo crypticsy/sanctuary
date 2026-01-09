@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <title>Cellular Automata Cave Generation</title>
+
+    <!--Meta Information about the website-->
+    <meta name="author" content="crypticsy" />
+    <meta name="keywords" content="crypticsy" />
+    <meta name="keywords" content="github" />
+    <meta name="keywords" content="sanctuary" />
+
+    <link rel="icon" href="../assets/images/icon.ico">
+    <meta property="og:image" content="../assets/images/icon.png">
+    <meta property="og:url" content="https://crypticsy.github.io/sanctuary.github.io/">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/css">
+        @font-face {
+            font-family: comfortaa_l;
+            src: url(../assets/font/comfortaa_light.ttf);
+        }
+        @font-face {
+            font-family: comfortaa_b;
+            src: url(../assets/font/comfortaa_bold.ttf);
+        }
+        @font-face {
+            font-family: retro_text;
+            src: url(../assets/font/retro_computer.ttf);
+        }
+
+        /* Fix for mobile viewport height (accounting for browser UI) */
+        :root {
+            --vh: 1vh;
+        }
+    </style>
+    <script>
+        // Calculate and set actual viewport height for mobile browsers
+        function setVH() {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        setVH();
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', setVH);
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comfortaa-light': ['comfortaa_l', 'sans-serif'],
+                        'comfortaa-bold': ['comfortaa_b', 'sans-serif'],
+                        'retro': ['retro_text', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!--importing external javascript-->
+    <script language="javascript" type="text/javascript" src="../assets/libraries/p5.min.js"></script>
+    <script language="javascript" type="text/javascript" src="cell_automata.js"></script>
+
+  </head>
+
+
+
+  <body class="m-0 bg-[#212121] flex flex-col md:flex-row overflow-hidden text-[#a7a7a7] font-retro text-sm select-none">
+
+    <div class="w-full md:w-1/2 h-auto md:max-h-screen md:h-screen p-4 sm:p-6 md:p-8 overflow-y-auto" style="max-height: calc(var(--vh, 1vh) * 50);">
+      <style>@media (min-width: 768px) { .md\:max-h-screen { max-height: 100vh !important; } }</style>
+
+      <a href="../index.html" class="inline-block px-4 sm:px-5 py-2 mb-4 sm:mb-6 bg-[#2a2a2a] text-[#03dc03] no-underline font-comfortaa-bold text-xs sm:text-sm rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+        ← Back to Home
+      </a>
+
+      <div class="pb-4 sm:pb-6">
+
+        <h1 class="font-comfortaa-bold text-base sm:text-lg md:text-xl leading-tight text-white mb-2 sm:mb-3">Cellular Automata Caves</h1>
+
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm mb-3 leading-relaxed">
+          Procedural cave generation using cellular automata rules on random noise. Cells evolve based on neighbor counts to create organic cave structures. Click to toggle cells, drag to paint walls, and watch patterns emerge through smoothing iterations.
+        </p>
+
+        <div class="mb-3 sm:mb-4">
+          <h2 class="text-xs sm:text-sm font-comfortaa-bold text-white mb-2">Controls</h2>
+
+          <div class="flex flex-wrap gap-2 mb-3">
+            <button id="regenerate_btn" class="px-3 py-1.5 bg-[#2a2a2a] text-[#03dc03] font-comfortaa-bold text-xs rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+              Regenerate
+            </button>
+            <button id="run_btn" class="px-3 py-1.5 bg-[#2a2a2a] text-[#03dc03] font-comfortaa-bold text-xs rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+              Run Smoothing
+            </button>
+            <button id="step_btn" class="px-3 py-1.5 bg-[#2a2a2a] text-[#03dc03] font-comfortaa-bold text-xs rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+              Step Once
+            </button>
+            <button id="reset_btn" class="px-3 py-1.5 bg-[#2a2a2a] text-[#03dc03] font-comfortaa-bold text-xs rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <h6 class="text-xs font-comfortaa-light m-0">Cell Size</h6>
+        </div>
+
+        <div class="mb-4">
+          <input id="cell_size_slider" type="range" min="4" max="20" value="8" class="w-full h-2 bg-[#4f4f4f] rounded-lg appearance-none cursor-pointer accent-[#03dc03]">
+        </div>
+
+        <div class="mb-2">
+          <h6 class="text-xs font-comfortaa-light m-0">Wall Density (%)</h6>
+        </div>
+
+        <div class="mb-4">
+          <input id="fill_slider" type="range" min="30" max="60" value="45" class="w-full h-2 bg-[#4f4f4f] rounded-lg appearance-none cursor-pointer accent-[#03dc03]">
+        </div>
+
+        <div class="mb-2">
+          <h6 class="text-xs font-comfortaa-light m-0">Smoothing Iterations</h6>
+        </div>
+
+        <div class="mb-4">
+          <input id="smooth_slider" type="range" min="1" max="10" value="4" class="w-full h-2 bg-[#4f4f4f] rounded-lg appearance-none cursor-pointer accent-[#03dc03]">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Canvas container for p5.js -->
+    <div id="canvas-container" class="w-full md:w-1/2 md:h-screen overflow-auto flex items-center justify-center relative bg-[#212121]" style="min-height: calc(var(--vh, 1vh) * 50);"></div>
+
+  </body>
+
+</html>
