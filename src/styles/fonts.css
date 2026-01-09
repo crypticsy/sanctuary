@@ -1,0 +1,29 @@
+/**
+ * Font Face Declarations
+ * Shared font definitions used across all projects
+ */
+
+@font-face {
+    font-family: comfortaa_l;
+    src: url(../../assets/font/comfortaa_light.ttf);
+}
+
+@font-face {
+    font-family: comfortaa_b;
+    src: url(../../assets/font/comfortaa_bold.ttf);
+}
+
+@font-face {
+    font-family: retro_text;
+    src: url(../../assets/font/retro_computer.ttf);
+}
+
+@font-face {
+    font-family: rAndC;
+    src: url(../../assets/font/r&c.otf);
+}
+
+@font-face {
+    font-family: typo;
+    src: url(../../assets/font/typo_draft.otf);
+}

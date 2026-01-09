@@ -1,0 +1,68 @@
+/**
+ * Layout Styles
+ * Responsive two-column layout pattern used across all projects
+ */
+
+/* Two-column responsive layout container */
+.project-layout {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--bg-primary);
+    overflow: hidden;
+    color: var(--text-primary);
+    font-family: retro_text, monospace;
+    font-size: 0.875rem;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .project-layout {
+        flex-direction: row;
+    }
+}
+
+/* Control panel (left side on desktop, top on mobile) */
+.control-panel {
+    width: 100%;
+    height: auto;
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(var(--vh, 1vh) * 50);
+}
+
+@media (min-width: 640px) {
+    .control-panel {
+        padding: 2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .control-panel {
+        width: 50%;
+        height: 100vh;
+        max-height: 100vh !important;
+        padding: 2.5rem;
+    }
+}
+
+/* Canvas container (right side on desktop, bottom on mobile) */
+.canvas-container {
+    width: 100%;
+    min-height: calc(var(--vh, 1vh) * 50);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .canvas-container {
+        width: 50%;
+        height: 100vh;
+    }
+}

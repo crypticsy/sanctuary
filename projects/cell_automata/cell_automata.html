@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <title>Cellular Automata Cave Generation</title>
+
+    <!--Meta Information about the website-->
+    <meta name="author" content="crypticsy" />
+    <meta name="keywords" content="crypticsy" />
+    <meta name="keywords" content="github" />
+    <meta name="keywords" content="sanctuary" />
+
+    <link rel="icon" href="../../assets/images/icon.ico">
+    <meta property="og:image" content="../../assets/images/icon.png">
+    <meta property="og:url" content="https://crypticsy.github.io/sanctuary.github.io/">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="../../src/styles/fonts.css" />
+    <link rel="stylesheet" href="../../src/styles/theme.css" />
+    <link rel="stylesheet" href="../../src/styles/layout.css" />
+    <link rel="stylesheet" href="../../src/styles/controls.css" />
+
+    <!-- Shared Scripts -->
+    <script src="../../src/scripts/viewport-fix.js"></script>
+    <script src="../../src/scripts/tailwind-config.js"></script>
+
+    <!--importing external javascript-->
+    <script language="javascript" type="text/javascript" src="../../assets/libraries/p5.min.js"></script>
+    <script language="javascript" type="text/javascript" src="cell_automata.js"></script>
+
+  </head>
+
+
+
+  <body class="project-layout">
+
+    <div class="control-panel">
+
+      <a href="../../index.html" class="back-button">
+        ← Back to Home
+      </a>
+
+      <div class="pb-4 sm:pb-6">
+
+        <h1 class="font-comfortaa-bold text-base sm:text-lg md:text-xl leading-tight text-white mb-2 sm:mb-3">Cellular Automata Caves</h1>
+
+        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm mb-3 leading-relaxed">
+          Procedural cave generation using cellular automata rules on random noise. Cells evolve based on neighbor counts to create organic cave structures. Click to toggle cells, drag to paint walls, and watch patterns emerge through smoothing iterations.
+        </p>
+
+        <div class="flex flex-col gap-8 mt-8">
+          <div class="flex flex-col gap-4">
+            <h2 class="text-xs sm:text-sm font-comfortaa-bold text-white">Controls</h2>
+            <div class="flex flex-wrap gap-4">
+              <button id="regenerate_btn" class="px-3 py-1.5 bg-[#2a2a2a] text-[#03dc03] font-comfortaa-bold text-xs rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+                Regenerate
+              </button>
+              <button id="run_btn" class="px-3 py-1.5 bg-[#2a2a2a] text-[#03dc03] font-comfortaa-bold text-xs rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+                Run Smoothing
+              </button>
+              <button id="step_btn" class="px-3 py-1.5 bg-[#2a2a2a] text-[#03dc03] font-comfortaa-bold text-xs rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+                Step Once
+              </button>
+              <button id="reset_btn" class="px-3 py-1.5 bg-[#2a2a2a] text-[#03dc03] font-comfortaa-bold text-xs rounded transition-all duration-300 hover:bg-[#03dc03] hover:text-[#212121]">
+                Reset
+              </button>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <h6 class="text-xs font-comfortaa-light m-0">Cell Size</h6>
+            <input id="cell_size_slider" type="range" min="4" max="20" value="8" class="w-full h-2 bg-[#4f4f4f] rounded-lg appearance-none cursor-pointer accent-[#03dc03]">
+          </div>
+  
+          <div class="flex flex-col gap-4">
+            <h6 class="text-xs font-comfortaa-light m-0">Wall Density (%)</h6>
+            <input id="fill_slider" type="range" min="30" max="60" value="45" class="w-full h-2 bg-[#4f4f4f] rounded-lg appearance-none cursor-pointer accent-[#03dc03]">
+          </div>
+  
+          <div class="flex flex-col gap-4">
+            <h6 class="text-xs font-comfortaa-light m-0">Smoothing Iterations</h6>
+            <input id="smooth_slider" type="range" min="1" max="10" value="4" class="w-full h-2 bg-[#4f4f4f] rounded-lg appearance-none cursor-pointer accent-[#03dc03]">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Canvas container for p5.js -->
+    <div id="canvas-container" class="canvas-container"></div>
+
+  </body>
+
+</html>

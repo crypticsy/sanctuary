@@ -1,0 +1,67 @@
+{
+  "projects": [
+    {
+      "id": "boids",
+      "name": "Boids Simulation",
+      "description": "Simulation of flocking behavior based on Craig Reynolds' Boids algorithm. Watch as simple rules create complex emergent patterns through separation, alignment, and cohesion.",
+      "image": "./assets/images/projects/boids.gif",
+      "link": "./projects/boids/boids.html",
+      "color": "yellow",
+      "featured": true
+    },
+    {
+      "id": "cell-automata",
+      "name": "Cellular Automata Caves",
+      "description": "Procedural cave generation using cellular automata with random noise initialization. Interactive 2D visualization where you can click to toggle cells and watch organic cave structures emerge through algorithmic smoothing.",
+      "image": "./assets/images/projects/cell automata.gif",
+      "link": "./projects/cell_automata/cell_automata.html",
+      "color": "green",
+      "featured": true
+    },
+    {
+      "id": "chess",
+      "name": "Chess Game",
+      "description": "A full chess engine with AI opponent support. Play human vs human, challenge an AI, or watch AI vs AI. Features all standard rules including castling, en passant, pawn promotion, check detection, and checkmate/stalemate recognition.",
+      "image": "./assets/images/projects/chess.gif",
+      "link": "./projects/chess/chess.html",
+      "color": "blue",
+      "featured": false
+    },
+    {
+      "id": "circle-packing",
+      "name": "Circle Packing",
+      "description": "A miniature project for converting pictures into artistic paintings by applying circles that bring their own interpretation.",
+      "image": "./assets/images/projects/circle-packing.gif",
+      "link": "./projects/circle_packing/circle_packing.html",
+      "color": "orange",
+      "featured": false
+    },
+    {
+      "id": "kaleidoscope",
+      "name": "Kaleidoscope",
+      "description": "A kaleidoscope is an optical apparatus containing two or more reflecting surfaces slanted at an angle to one other. This project tries to replicate the traits of a kaleidoscope to create symmetrical pattern using user input.",
+      "image": "./assets/images/projects/kaleidoscope.gif",
+      "link": "./projects/kaleidoscope/kaleidoscope.html",
+      "color": "purple",
+      "featured": true
+    },
+    {
+      "id": "motion-tracking",
+      "name": "Motion Tracking",
+      "description": "Real-time human pose detection using PoseNet and ml5.js. Track body movements through your camera or upload a video to analyze motion patterns with dynamic visualizations.",
+      "image": "./assets/images/projects/motion tracking.png",
+      "link": "./projects/motion_tracking/motion_tracking.html",
+      "color": "red",
+      "featured": false
+    },
+    {
+      "id": "terrain-generation",
+      "name": "Terrain Generation",
+      "description": "A miniature project that creates a 3D procedural terrain using Perlin Noise.",
+      "image": "./assets/images/projects/terrain generation.gif",
+      "link": "./projects/terrain_generation/terrain_generation.html",
+      "color": "green",
+      "featured": false
+    }
+  ]
+}

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
         <title>Sanctuary | Home</title>
@@ -7,9 +6,7 @@
         <!--Meta Information about the website-->
         <meta name="Sanctuary" content="A repository where curiosity and randomness intersects visual augmentation." />
         <meta name="author" content="crypticsy" />
-        <meta name="keywords" content="crypticsy" />
-        <meta name="keywords" content="github" />
-        <meta name="keywords" content="sanctuary" />
+        <meta name="keywords" content="crypticsy, github, sanctuary" />
 
         <link rel="icon" href="./assets/images/icon.ico">
         <meta property="og:image" content="./assets/images/icon.png">
@@ -21,23 +18,16 @@
 
         <!-- TailwindCSS -->
         <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Shared Styles -->
+        <link rel="stylesheet" href="./src/styles/fonts.css" />
+        <link rel="stylesheet" href="./src/styles/theme.css" />
+
+        <!-- Projects Loader Script -->
+        <script src="./assets/js/projects-loader.js" defer></script>
+
         <style type="text/css">
-            @font-face {
-                font-family: rAndC;
-                src: url(./assets/font/r&c.otf);
-            }
-            @font-face {
-                font-family: typo;
-                src: url(./assets/font/typo_draft.otf);
-            }
-            @font-face {
-                font-family: comfortaa_l;
-                src: url(./assets/font/comfortaa_light.ttf);
-            }
-            @font-face {
-                font-family: comfortaa_b;
-                src: url(./assets/font/comfortaa_bold.ttf);
-            }
+            /* Tailwind config with Gruvbox colors */
         </style>
         <script>
             tailwind.config = {
@@ -48,6 +38,22 @@
                             'randc': ['rAndC', 'sans-serif'],
                             'comfortaa-light': ['comfortaa_l', 'sans-serif'],
                             'comfortaa-bold': ['comfortaa_b', 'sans-serif'],
+                        },
+                        colors: {
+                            'gruvbox': {
+                                'bg': '#1d2021',
+                                'bg-soft': '#282828',
+                                'bg-medium': '#3c3836',
+                                'fg': '#ebdbb2',
+                                'fg-gray': '#a89984',
+                                'yellow': '#d79921',
+                                'yellow-bright': '#fabd2f',
+                                'orange': '#d65d0e',
+                                'red': '#fb4934',
+                                'green': '#8ec07c',
+                                'blue': '#458588',
+                                'purple': '#b16286',
+                            }
                         }
                     }
                 }
@@ -55,137 +61,49 @@
         </script>
     </head>
 
+    <body class="m-0 p-0 w-full min-h-screen bg-gruvbox-bg overflow-x-hidden select-none px-4 sm:px-6">
 
-
-    <body class="m-0 p-0 w-full min-h-screen bg-[#212121] overflow-x-hidden select-none px-4 sm:px-6">
-
-        <!-- Custom scrollbar styles -->
-        <style>
-            ::-webkit-scrollbar {
-                width: 8px;
-                background-color: #212121;
-            }
-            ::-webkit-scrollbar-thumb {
-                background: #474747;
-                border-radius: 50px;
-            }
-            ::-webkit-scrollbar-track {
-                box-shadow: inset 0 0 5px #515151;
-                border-radius: 50px;
-            }
-            ::-webkit-scrollbar-thumb:hover {
-                background: #908f8f;
-            }
-        </style>
-
-        <div class="pt-12 sm:pt-18 md:pt-20 mb-8 sm:mb-12 md:mb-16">
-            <h1 class="text-white text-center font-typo text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] mb-4 sm:mb-6">
-                <span class="font-randc text-5xl sm:text-6xl md:text-7xl lg:text-8xl">S</span>anctuary
+        <!-- Header Section -->
+        <div class="pt-16 sm:pt-20 md:pt-24 mb-8 sm:mb-12 md:mb-16">
+            <h1 class="text-gruvbox-fg text-center font-typo text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] mb-4 sm:mb-6">
+                <span class="font-randc text-gruvbox-yellow text-5xl sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-lg">S</span>anctuary
             </h1>
-            <p class="text-[#a7a7a7] text-center font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm px-4 mt-4 sm:mt-6 leading-loose">
+            <p class="text-gruvbox-fg-gray text-center font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm px-4 mt-4 sm:mt-6 leading-loose max-w-2xl mx-auto">
                 A repository where curiosity and randomness intersects visual augmentation.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 mx-4 sm:mx-8 md:mx-16 lg:mx-24 mb-12 sm:mb-16 md:mb-20">
+        <!-- Projects Grid - Content-Based Height Layout -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 mx-4 sm:mx-8 md:mx-16 lg:mx-24 mb-12 sm:mb-16 md:mb-20">
 
-            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
-                <a href="./boids/boids.html" class="no-underline text-inherit block">
-                    <img src="./assets/images/projects/boids.gif" alt="Boids Simulation Preview" class="w-full h-40 sm:h-48 object-cover">
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Boids Simulation</h2>
-                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm m-0 leading-loose">Simulation of flocking behavior based on Craig Reynolds' Boids algorithm. Watch as simple rules create complex emergent patterns through separation, alignment, and cohesion.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
-                <a href="./cell_automata/cell_automata.html" class="no-underline text-inherit block">
-                    <img src="./assets/images/projects/cell automata.gif" alt="Cellular Automata Cave Generation Preview" class="w-full h-40 sm:h-48 object-cover">
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Cellular Automata Caves</h2>
-                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm m-0 leading-loose">Procedural cave generation using cellular automata with random noise initialization. Interactive 2D visualization where you can click to toggle cells and watch organic cave structures emerge through algorithmic smoothing.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
-                <a href="./chess/chess.html" class="no-underline text-inherit block">
-                    <img src="./assets/images/projects/chess.gif" alt="Chess Game Preview" class="w-full h-40 sm:h-48 object-cover">
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Chess Game</h2>
-                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm m-0 leading-loose">A full chess engine with AI opponent support. Play human vs human, challenge an AI, or watch AI vs AI. Features all standard rules including castling, en passant, pawn promotion, check detection, and checkmate/stalemate recognition.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
-                <a href="./circle_packing/circle_packing.html" class="no-underline text-inherit block">
-                    <img src="./assets/images/projects/circle-packing.gif" alt="Circle Packing Preview" class="w-full h-40 sm:h-48 object-cover">
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Circle Packing</h2>
-                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm m-0 leading-loose">A miniature project for converting pictures into artistic paintings by applying circles that bring their own interpretation.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
-                <a href="./kaleidoscope/kaleidoscope.html" class="no-underline text-inherit block">
-                    <img src="./assets/images/projects/kaleidoscope.gif" alt="Kaleidoscope Preview" class="w-full h-40 sm:h-48 object-cover">
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Kaleidoscope</h2>
-                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm m-0 leading-loose">A kaleidoscope is an optical apparatus containing two or more reflecting surfaces slanted at an angle to one other. This project tries to replicate the traits of a kaleidoscope to create symmetrical pattern using user input.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
-                <a href="./motion_tracking/motion_tracking.html" class="no-underline text-inherit block">
-                    <img src="./assets/images/projects/motion tracking.png" alt="Motion Tracking Preview" class="w-full h-40 sm:h-48 object-cover">
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Motion Tracking</h2>
-                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm m-0 leading-loose">Real-time human pose detection using PoseNet and ml5.js. Track body movements through your camera or upload a video to analyze motion patterns with dynamic visualizations.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
-                <a href="./shakespeare_monkey/shakespeare_monkey.html" class="no-underline text-inherit block">
-                    <img src="./assets/images/projects/shakespeare monkey.png" alt="Shakespeare Monkey Preview" class="w-full h-40 sm:h-48 object-cover">
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Shakespeare Monkey</h2>
-                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm m-0 leading-loose">A miniature project that looks into the infinite monkey theorem, which states that a monkey hitting keys at random on a typewriter keyboard for an infinite amount of time will almost surely type any given text, such as the complete works of William Shakespeare.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl shadow-lg">
-                <a href="./terrain_generation/terrain_generation.html" class="no-underline text-inherit block">
-                    <img src="./assets/images/projects/terrain generation.gif" alt="Terrain Generation Preview" class="w-full h-40 sm:h-48 object-cover">
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h2 class="text-white text-center font-comfortaa-bold text-sm sm:text-base md:text-lg mt-0 mb-3 sm:mb-4 leading-relaxed">Terrain Generation</h2>
-                        <p class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm m-0 leading-loose">A miniature project that creates a 3D procedural terrain using Perlin Noise.</p>
-                    </div>
-                </a>
+            <!-- Loading State -->
+            <div class="col-span-full text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gruvbox-yellow"></div>
+                <p class="text-gruvbox-fg-gray text-sm mt-4 font-comfortaa-light">Loading projects...</p>
             </div>
         </div>
 
-        <p class="text-center text-[#d0d0d0] font-comfortaa-light tracking-wide text-xs sm:text-sm mt-8 sm:mt-12 mb-4 sm:mb-6 select-none">
-            -- &nbsp; Compiled by <a
-            href="https://www.animeshbasnet.com.np/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="font-medium text-blue-600 dark:text-blue-400 inline-flex items-center gap-2 hover:underline"
-          >
-            Crypticsy
-            <img
-              src="https://github.com/crypticsy.png"
-              alt="Crypticsy GitHub Profile"
-              class="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-gray-300 dark:border-gray-700"
-            />
-          </a> &nbsp; --
-        </p>
+        <!-- Footer -->
+        <footer class="text-center text-gruvbox-fg font-comfortaa-light tracking-wide text-xs sm:text-sm mt-8 sm:mt-12 mb-6 sm:mb-8">
+            <div class="flex items-center justify-center gap-2">
+                <span class="text-gruvbox-yellow">--</span>
+                <span>Compiled by</span>
+                <a
+                    href="https://www.animeshbasnet.com.np/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-medium text-gruvbox-yellow hover:text-gruvbox-yellow-bright inline-flex items-center gap-2 transition-colors"
+                >
+                    Crypticsy
+                    <img
+                        src="https://github.com/crypticsy.png"
+                        alt="Crypticsy GitHub Profile"
+                        class="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-gruvbox-bg-medium hover:border-gruvbox-yellow transition-all"
+                    />
+                </a>
+                <span class="text-gruvbox-yellow">--</span>
+            </div>
+        </footer>
 
     </body>
-
 </html>

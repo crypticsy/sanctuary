@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{PROJECT_TITLE}} | Sanctuary</title>
+
+    <!-- Meta Information -->
+    <meta name="author" content="crypticsy" />
+    <meta name="keywords" content="crypticsy, github, sanctuary" />
+    <link rel="icon" href="../../assets/images/icon.ico" />
+    <meta property="og:image" content="../../assets/images/icon.png" />
+    <meta property="og:url" content="https://crypticsy.github.io/sanctuary.github.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="true" />
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="../../src/styles/fonts.css" />
+    <link rel="stylesheet" href="../../src/styles/theme.css" />
+    <link rel="stylesheet" href="../../src/styles/layout.css" />
+    <link rel="stylesheet" href="../../src/styles/controls.css" />
+
+    <!-- Shared Scripts -->
+    <script src="../../src/scripts/viewport-fix.js"></script>
+    <script src="../../src/scripts/tailwind-config.js"></script>
+
+    <!-- p5.js Library (comment out if not needed) -->
+    <script src="../../assets/libraries/p5.min.js"></script>
+
+    <!-- Project-Specific Scripts -->
+    <script src="{{PROJECT_MAIN_JS}}"></script>
+    <!-- Add additional project scripts here as needed -->
+    <!-- <script src="AdditionalClass.js"></script> -->
+
+    <!-- Project-Specific Styles (optional) -->
+    <style>
+        /* Add any project-specific custom styles here */
+    </style>
+</head>
+
+<body class="project-layout">
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <!-- Back Button -->
+        <a href="../../index.html" class="back-button">
+            ← Back to Home
+        </a>
+
+        <!-- Project Header -->
+        <div class="pb-6 sm:pb-8">
+            <h1>{{PROJECT_TITLE}}</h1>
+            <p>{{PROJECT_DESCRIPTION}}</p>
+        </div>
+
+        <!-- Project Controls Section -->
+        <div id="project-controls">
+            <!-- Example: Slider Control -->
+            <!-- <div class="mb-6">
+                <h6>Control Name</h6>
+                <input
+                    id="example_slider"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                    class="w-full h-2 bg-[#4f4f4f] rounded-lg appearance-none cursor-pointer accent-[#03dc03]"
+                />
+                <p class="text-[#a7a7a7] text-xs mt-2" id="example_value">50</p>
+            </div> -->
+
+            <!-- Example: Button -->
+            <!-- <div class="flex gap-3">
+                <button onclick="someFunction()" class="btn-primary">
+                    Action Button
+                </button>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- Canvas Container -->
+    <div id="canvas-container" class="canvas-container"></div>
+
+    <!-- Project-Specific Inline Scripts (if needed) -->
+    <script>
+        // Add any project-specific inline JavaScript here
+        // For example: slider event listeners, button handlers, etc.
+    </script>
+</body>
+</html>

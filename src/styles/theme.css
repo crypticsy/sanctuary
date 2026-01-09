@@ -1,0 +1,53 @@
+/**
+ * Theme Styles
+ * Gruvbox Dark color scheme and base styling shared across all projects
+ * Based on: https://github.com/morhetz/gruvbox
+ */
+
+:root {
+    /* Background Colors - Gruvbox Dark */
+    --bg-primary: #1d2021;      /* Dark hard background */
+    --bg-secondary: #282828;    /* Dark medium background */
+    --bg-tertiary: #3c3836;     /* Dark soft background */
+    --bg-hover: #504945;        /* Hover state background */
+
+    /* Text Colors - Gruvbox */
+    --text-primary: #ebdbb2;    /* Light foreground */
+    --text-secondary: #a89984;  /* Gray text */
+    --text-tertiary: #665c54;   /* Dark gray */
+    --text-white: #fbf1c7;      /* Bright foreground */
+
+    /* Accent Colors - Gruvbox */
+    --accent-yellow: #d79921;   /* Main yellow accent */
+    --accent-yellow-bright: #fabd2f;  /* Bright yellow (caret) */
+    --accent-orange: #d65d0e;   /* Orange */
+    --accent-red: #fb4934;      /* Error red */
+    --accent-red-dark: #cc241d; /* Dark red */
+    --accent-green: #8ec07c;    /* Aqua green */
+    --accent-green-dark: #689d6a; /* Dark green */
+    --accent-blue: #458588;     /* Blue */
+    --accent-purple: #b16286;   /* Purple */
+
+    /* Viewport Height Fix (for mobile browsers) */
+    --vh: 1vh;
+}
+
+/* Custom Scrollbar Styles - Gruvbox */
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bg-hover);
+}
