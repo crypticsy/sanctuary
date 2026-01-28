@@ -6,10 +6,10 @@ A repository where curiosity and randomness intersects visual augmentation. [Vis
 
 #### Individual Projects
 
-- [Boids](https://crypticsy.github.io/sanctuary/boids/boids.html)
-- [Cellular Automata Caves](https://crypticsy.github.io/sanctuary/cell_automata/cell_automata.html)
-- [Chess](https://crypticsy.github.io/sanctuary/chess/chess.html)
-- [Circle Packing](https://crypticsy.github.io/sanctuary/circle_packing/circle_packing.html)
-- [Kaleidoscope](https://crypticsy.github.io/sanctuary/kaleidoscope/kaleidoscope.html)
-- [Motion Tracking](https://crypticsy.github.io/sanctuary/motion_tracking/motion_tracking.html)
-- [Terrain Generation](https://crypticsy.github.io/sanctuary/terrain_generation/terrain_generation.html)
+- [Boids](https://crypticsy.github.io/sanctuary/projects/boids/boids.html)
+- [Cellular Automata Caves](https://crypticsy.github.io/sanctuary/projects/cell_automata/cell_automata.html)
+- [Chess](https://crypticsy.github.io/sanctuary/projects/chess/chess.html)
+- [Circle Packing](https://crypticsy.github.io/sanctuary/projects/circle_packing/circle_packing.html)
+- [Kaleidoscope](https://crypticsy.github.io/sanctuary/projects/kaleidoscope/kaleidoscope.html)
+- [Motion Tracking](https://crypticsy.github.io/sanctuary/projects/motion_tracking/motion_tracking.html)
+- [Terrain Generation](https://crypticsy.github.io/sanctuary/projects/terrain_generation/terrain_generation.html)
