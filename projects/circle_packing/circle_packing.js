@@ -2,6 +2,7 @@ let circles = [];
 let img;
 let target;
 let mx, my;
+let imageLoadError = false;
 
 function preload() {
     const params = new URLSearchParams(window.location.search);
@@ -9,19 +10,25 @@ function preload() {
     if (url == null) {
         img = loadImage("./assets/monalisa.jpg")
     } else {
-        const cap = document.getElementsByClassName("cap")[0]
-        const p = document.createElement("p");
-        const a = document.createElement("a");
-        p.innerHTML = "The image on the right is generated using circle packing of ";
-        a.innerHTML = "this image";
-        a.href = url;
-        a.target = "#";
-        p.appendChild(a);
-        p.innerHTML += ".";
-        p.id = "caption";
-        cap.removeChild(cap.lastChild);
-        cap.appendChild(p);
-        img = loadImage(url);
+        const cap = document.getElementsByClassName("cap")[0];
+        if (cap) {
+            const p = document.createElement("p");
+            const a = document.createElement("a");
+            p.innerHTML = "The image on the right is generated using circle packing of ";
+            a.innerHTML = "this image";
+            a.href = url;
+            a.target = "#";
+            p.appendChild(a);
+            p.innerHTML += ".";
+            p.id = "caption";
+            cap.removeChild(cap.lastChild);
+            cap.appendChild(p);
+        }
+        img = loadImage(url, null, () => {
+            imageLoadError = true;
+            alert("Failed to load the image. The server may not allow cross-origin requests (CORS). Try a different image URL.");
+            img = loadImage("./assets/monalisa.jpg");
+        });
     }
 }
 
@@ -64,7 +71,16 @@ function setup() {
     var canvas = createCanvas(width, height);
     canvas.parent('canvas-container');
 
-    img.loadPixels();
+    try {
+        img.loadPixels();
+    } catch (e) {
+        imageLoadError = true;
+        alert("Cannot read pixel data from this image due to cross-origin restrictions (CORS). Try a different image URL.");
+        img = loadImage("./assets/monalisa.jpg", () => {
+            img.loadPixels();
+        });
+        return;
+    }
 
 }
 
