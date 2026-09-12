@@ -21,7 +21,7 @@
     {
       "id": "chess",
       "name": "Chess Game",
-      "description": "A full chess engine with AI opponent support. Play human vs human, challenge an AI, or watch AI vs AI. Switch the AI Engine to a connectome-inspired Fruit Fly Brain to play against a little animated fly that buzzes around weighing its options and dives in once its neural simulation settles on a move. Features all standard rules including castling, en passant, pawn promotion, check detection, and checkmate/stalemate recognition.",
+      "description": "A full chess engine with AI opponent support. Play human vs human, challenge an AI, or watch AI vs AI. Features a connectome-inspired Fruit Fly Brain AI where an animated perched fly ponders candidate moves with a pipe and thought bubble as neural simulations resolve in real time, alongside a classic Minimax engine. Supports all standard rules including castling, en passant, pawn promotion, and checkmate/stalemate detection.",
       "image": "./assets/images/projects/chess.gif",
       "link": "./projects/chess/chess.html",
       "color": "blue",
