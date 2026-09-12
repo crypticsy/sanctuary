@@ -2,6 +2,7 @@
 
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
     <title>Chess Game</title>
 
     <!--Meta Information about the website-->
@@ -58,6 +59,16 @@
       type="text/javascript"
       src="ChessAI.js"
     ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="NeuralBrain.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="FlyView.js"
+    ></script>
   </head>
 
   <body class="project-layout">
@@ -97,9 +108,22 @@
             class="text-xs text-[#acf0ed] no-underline hover:underline"
           >
             original Python version</a
-          >. The AI uses minimax algorithm with alpha-beta pruning and
-          position-based evaluation for strategic play. The game tracks all
-          moves and detects checkmate and stalemate conditions.
+          >. The default AI uses the minimax algorithm with alpha-beta
+          pruning and position-based evaluation for strategic play. The game
+          tracks all moves and detects checkmate and stalemate conditions.
+        </p>
+
+        <p
+          class="text-[#a7a7a7] text-justify font-comfortaa-light text-[0.7rem] sm:text-xs md:text-sm mb-8 leading-loose"
+        >
+          Switch the AI Engine to
+          <strong class="text-white">🪰 Fruit Fly Brain</strong> to play
+          against a connectome-inspired neural brain instead: the board is
+          encoded into sensory neuron currents, run through a
+          leaky-integrator simulation over a fly-brain-shaped wiring
+          diagram, and decoded from motor neurons into a move. Watch the
+          little fly buzz around weighing its options in the panel below the
+          board, then dive in once it settles on one.
         </p>
       </div>
 
@@ -117,7 +141,6 @@
                 type="radio"
                 name="gameMode"
                 value="human-human"
-                checked
                 onchange="setGameMode('human-human')"
                 class="accent-[#03dc03]"
               />
@@ -128,6 +151,7 @@
                 type="radio"
                 name="gameMode"
                 value="human-ai"
+                checked
                 onchange="setGameMode('human-ai')"
                 class="accent-[#03dc03]"
               />
@@ -156,19 +180,53 @@
           </div>
         </div>
 
-        <div class="flex flex-wrap gap-3 h-12">
-          <button
-            onclick="resetGame()"
-            class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#03dc03] text-black text-xs sm:text-sm font-medium hover:bg-[#159b15] hover:text-white transition-colors focus:outline-none"
-          >
-            Reset Game
-          </button>
-          <button
-            onclick="undoMove()"
-            class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#dc0303] text-white text-xs sm:text-sm font-medium hover:bg-[#9b1515] transition-colors focus:outline-none"
-          >
-            Undo Move
-          </button>
+        <div class="flex flex-col gap-4">
+          <!-- AI Engine Selection -->
+          <div>
+            <h6
+              class="text-xs sm:text-sm font-comfortaa-light m-0 mb-3 text-white"
+            >
+              AI Engine
+            </h6>
+            <div class="flex flex-col gap-2">
+              <label class="flex items-center gap-2 text-xs cursor-pointer">
+                <input
+                  type="radio"
+                  name="aiEngine"
+                  value="minimax"
+                  onchange="setAIEngine('minimax')"
+                  class="accent-[#fabd2f]"
+                />
+                <span class="text-[#a7a7a7]">Minimax Engine</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs cursor-pointer">
+                <input
+                  type="radio"
+                  name="aiEngine"
+                  value="flybrain"
+                  checked
+                  onchange="setAIEngine('flybrain')"
+                  class="accent-[#fabd2f]"
+                />
+                <span class="text-[#a7a7a7]">🪰 Fruit Fly Brain</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <button
+              onclick="resetGame()"
+              class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#03dc03] text-black text-xs sm:text-sm font-medium hover:bg-[#159b15] hover:text-white transition-colors focus:outline-none"
+            >
+              Reset Game
+            </button>
+            <button
+              onclick="undoMove()"
+              class="rounded px-4 sm:px-5 py-2 sm:py-2.5 border-0 bg-[#dc0303] text-white text-xs sm:text-sm font-medium hover:bg-[#9b1515] transition-colors focus:outline-none"
+            >
+              Undo Move
+            </button>
+          </div>
         </div>
       </div>
 

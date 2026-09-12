@@ -2,16 +2,34 @@ let chessBoard;
 let squareSize;
 let boardSize;
 let images = {};
-let canvasSize;
+let canvasSize; // size of the square board area (also the canvas width)
 let imagesLoaded = false;
 let loadingProgress = 0;
 
 // Game modes
-let gameMode = 'human-human'; // 'human-human', 'human-ai', 'ai-ai'
+let gameMode = 'human-ai'; // 'human-human', 'human-ai', 'ai-ai'
 let playerWhite = true; // true = human, false = AI
-let playerBlack = true; // true = human, false = AI
+let playerBlack = false; // true = human, false = AI
 let aiThinking = false;
 let aiMoveDelay = 800; // ms delay before AI moves (increased for minimax calculation)
+
+// AI engine: 'minimax' (classic evaluation-based engine) or 'flybrain'
+// (a connectome-inspired neural brain - see NeuralBrain.js/FlyView.js).
+// Switching engines only changes *how* the AI's move is chosen; game
+// rules, board rendering, and human play are identical either way.
+let aiEngine = 'flybrain';
+const FLY_PANEL_HEIGHT = 210;
+
+let neuralBrain = null;
+let flyView = null;
+let flyModelLoaded = false;
+let flyModelLoadError = null;
+
+// Fly-brain "thinking" is driven frame-by-frame from a pre-run simulation
+// trace, so the fly's thought bubble and final move both reflect the same
+// computation that decided the move - see startFlyBrainThinking / advanceFlyBrainThinking.
+let pendingFlyThink = null;
+const FRAMES_PER_SIM_STEP = 3;
 
 function preload() {
   // Load all chess piece images with error handling
@@ -49,18 +67,36 @@ function setup() {
   const containerWidth = container.clientWidth;
   const containerHeight = container.clientHeight;
 
-  // Make canvas square and responsive
+  // Make the board square and responsive; the canvas itself grows taller
+  // than the board when the fly-brain panel is showing (see canvasHeight()).
   canvasSize = min(containerWidth, containerHeight, 600);
   boardSize = canvasSize * 0.9;
   squareSize = boardSize / 8;
 
-  const canvas = createCanvas(canvasSize, canvasSize);
+  const canvas = createCanvas(canvasSize, canvasHeight());
   canvas.parent('canvas-container');
 
   chessBoard = new ChessBoard();
 
+  flyView = new FlyView(0, canvasSize, canvasSize, FLY_PANEL_HEIGHT);
+  loadJSON('assets/data/brain_model.json', onFlyModelLoaded, onFlyModelLoadError);
+
   updateGameStatus();
   updateMoveHistory();
+}
+
+function canvasHeight() {
+  return aiEngine === 'flybrain' ? canvasSize + FLY_PANEL_HEIGHT : canvasSize;
+}
+
+function onFlyModelLoaded(model) {
+  neuralBrain = new NeuralBrain(model);
+  flyModelLoaded = true;
+}
+
+function onFlyModelLoadError(err) {
+  console.error('Failed to load fly brain model:', err);
+  flyModelLoadError = 'Could not load the fly brain model.';
 }
 
 function draw() {
@@ -83,12 +119,65 @@ function draw() {
   drawLastMove();
   drawSelectedSquare();
   drawValidMoves();
+  if (aiEngine === 'flybrain' && pendingFlyThink) drawFlyBrainGlow(pendingFlyThink);
   drawPieces();
 
   pop();
 
+  if (aiEngine === 'flybrain') {
+    drawFlyPanel();
+    advanceFlyBrainThinking();
+  }
+
   // Handle AI moves
   handleAI();
+}
+
+function drawFlyPanel() {
+  if (flyModelLoadError) {
+    push();
+    fill(220, 80, 80);
+    textAlign(CENTER, CENTER);
+    textSize(12);
+    text(flyModelLoadError, canvasSize / 2, canvasSize + FLY_PANEL_HEIGHT / 2);
+    pop();
+    return;
+  }
+  if (!flyModelLoaded) {
+    push();
+    fill(200);
+    textAlign(CENTER, CENTER);
+    textSize(12);
+    text('Loading fly brain...', canvasSize / 2, canvasSize + FLY_PANEL_HEIGHT / 2);
+    pop();
+    return;
+  }
+  flyView.draw();
+}
+
+// While the fly brain is deciding, glow legal destination squares by how
+// much the current (still-settling) motor readout favors them.
+function drawFlyBrainGlow(think) {
+  const { legalMoves, currentScores } = think;
+  if (!currentScores) return;
+
+  let maxS = -Infinity, minS = Infinity;
+  for (const s of currentScores) {
+    if (s > maxS) maxS = s;
+    if (s < minS) minS = s;
+  }
+  const range = Math.max(maxS - minS, 1e-6);
+
+  noStroke();
+  colorMode(HSB, 255);
+  for (let i = 0; i < legalMoves.length; i++) {
+    const light = (currentScores[i] - minS) / range;
+    if (light < 0.55) continue;
+    fill(45, 200, 255, (light - 0.55) / 0.45 * 110);
+    const m = legalMoves[i];
+    rect(m.to.col * squareSize, m.to.row * squareSize, squareSize, squareSize);
+  }
+  colorMode(RGB, 255);
 }
 
 function drawLoadingScreen() {
@@ -199,6 +288,7 @@ function drawValidMoves() {
 
 function mousePressed() {
   if (!imagesLoaded) return;
+  if (pendingFlyThink) return;
 
   // Check if current player is human
   const isHumanTurn = (chessBoard.whiteToMove && playerWhite) || (!chessBoard.whiteToMove && playerBlack);
@@ -228,8 +318,13 @@ function mousePressed() {
 }
 
 function handleAI() {
-  if (chessBoard.checkmate || chessBoard.stalemate || aiThinking) return;
+  if (chessBoard.checkmate || chessBoard.stalemate) return;
+  if (aiEngine === 'flybrain') {
+    handleFlyBrainAI();
+    return;
+  }
 
+  if (aiThinking || pendingFlyThink) return;
   const isAITurn = (chessBoard.whiteToMove && !playerWhite) || (!chessBoard.whiteToMove && !playerBlack);
 
   if (isAITurn && !aiThinking) {
@@ -252,6 +347,143 @@ function makeAIMove() {
     chessBoard.selectSquare(bestMove.to.row, bestMove.to.col);
     updateMoveHistory();
   }
+}
+
+// --- Fruit Fly Brain engine ---
+// Same encode -> simulate -> decode pipeline as the standalone
+// connectome pipeline in Idea/Chess/brain/: the board is encoded into
+// sensory neuron currents, run through a leaky-integrator simulation
+// over the (currently synthetic, connectome-shaped) neural graph, and
+// decoded from motor-neuron activity into a move. The fly character
+// animates that same computation instead of hiding it behind a spinner.
+
+function getLegalMovesForColor(color) {
+  const moves = [];
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      const piece = chessBoard.getPiece(r, c);
+      if (chessBoard.getPieceColor(piece) === color) {
+        const valid = chessBoard.getValidMovesForPiece(r, c);
+        for (const m of valid) {
+          moves.push({ from: { row: r, col: c }, to: { row: m.row, col: m.col } });
+        }
+      }
+    }
+  }
+  return moves;
+}
+
+function squareLabel(sq) {
+  return String.fromCharCode(97 + sq.col) + (8 - sq.row);
+}
+
+function moveLabel(move) {
+  return `${squareLabel(move.from)} → ${squareLabel(move.to)}`;
+}
+
+function handleFlyBrainAI() {
+  if (pendingFlyThink) return;
+  if (!flyModelLoaded) return;
+
+  const isAITurn = (chessBoard.whiteToMove && !playerWhite) || (!chessBoard.whiteToMove && !playerBlack);
+  if (!isAITurn) return;
+
+  startFlyBrainThinking();
+}
+
+function startFlyBrainThinking() {
+  const color = chessBoard.whiteToMove ? 'w' : 'b';
+  const legalMoves = getLegalMovesForColor(color);
+  if (legalMoves.length === 0) return;
+
+  const currents = neuralBrain.encodeBoard(chessBoard.board, chessBoard.whiteToMove);
+
+  const stepSnapshots = [];
+  const { motorActivity } = neuralBrain.runSimulation(currents, (state) => {
+    stepSnapshots.push(Float64Array.from(state));
+  });
+
+  const { move } = neuralBrain.decodeMove(motorActivity, legalMoves);
+
+  pendingFlyThink = {
+    legalMoves,
+    stepSnapshots,
+    chosenMove: move,
+    currentScores: null,
+    // 'smoking'  - fly just puffs on its pipe, no move shown yet
+    // 'buzzing'  - simulation replay narrows in, thought bubble appears
+    // 'deciding' - the fly perks up and commits to the chosen move
+    phase: 'smoking',
+  };
+  flyView.startThinking();
+  updateGameStatus();
+}
+
+const FLY_SMOKING_FRAMES = 60; // pure "puffing on it, no answer yet" beat
+
+function advanceFlyBrainThinking() {
+  if (!pendingFlyThink) return;
+
+  if (pendingFlyThink.phase === 'smoking') {
+    if (pendingFlyThink.smokingStart === undefined) {
+      pendingFlyThink.smokingStart = frameCount;
+    }
+    if (frameCount - pendingFlyThink.smokingStart >= FLY_SMOKING_FRAMES) {
+      pendingFlyThink.phase = 'buzzing';
+    }
+    return;
+  }
+
+  if (pendingFlyThink.phase === 'buzzing') {
+    if (pendingFlyThink.startFrameOffset === undefined) {
+      pendingFlyThink.startFrameOffset = Math.floor(frameCount / FRAMES_PER_SIM_STEP);
+    }
+
+    const stepIdx = Math.floor(frameCount / FRAMES_PER_SIM_STEP) - pendingFlyThink.startFrameOffset;
+
+    if (stepIdx < pendingFlyThink.stepSnapshots.length) {
+      const state = pendingFlyThink.stepSnapshots[stepIdx];
+
+      const motorActivity = new Float64Array(neuralBrain.motorIdx.length);
+      for (let i = 0; i < neuralBrain.motorIdx.length; i++) {
+        motorActivity[i] = state[neuralBrain.motorIdx[i]];
+      }
+      const { move, scores } = neuralBrain.decodeMove(motorActivity, pendingFlyThink.legalMoves);
+      pendingFlyThink.currentScores = scores;
+      flyView.updateThought(moveLabel(move));
+      updateFlyThinkingProgress(stepIdx, pendingFlyThink.stepSnapshots.length);
+    } else {
+      pendingFlyThink.phase = 'deciding';
+      flyView.decide(moveLabel(pendingFlyThink.chosenMove));
+    }
+  } else if (pendingFlyThink.phase === 'deciding') {
+    if (flyView.state === 'landed' || flyView.state === 'idle') {
+      const move = pendingFlyThink.chosenMove;
+      chessBoard.selectSquare(move.from.row, move.from.col);
+      chessBoard.selectSquare(move.to.row, move.to.col);
+      updateMoveHistory();
+
+      pendingFlyThink = null;
+      updateGameStatus();
+    }
+  }
+}
+
+function updateFlyThinkingProgress(stepIdx, totalSteps) {
+  const infoElement = document.getElementById('game-info');
+  if (!infoElement) return;
+  const pct = Math.round(((stepIdx + 1) / totalSteps) * 100);
+  infoElement.textContent = `The fly brain is thinking... ${pct}%`;
+}
+
+function setAIEngine(engine) {
+  aiEngine = engine;
+  pendingFlyThink = null;
+  aiThinking = false;
+  if (flyView) flyView.idle();
+  resizeCanvas(canvasSize, canvasHeight());
+  if (flyView) flyView.resize(0, canvasSize, canvasSize, FLY_PANEL_HEIGHT);
+  updateGameStatus();
 }
 
 function setGameMode(mode) {
@@ -300,14 +532,17 @@ function updateGameStatus() {
   } else {
     const currentPlayer = chessBoard.whiteToMove ? "White" : "Black";
     const isAI = (chessBoard.whiteToMove && !playerWhite) || (!chessBoard.whiteToMove && !playerBlack);
-    const playerType = isAI ? " (AI)" : "";
+    const playerType = isAI ? (aiEngine === 'flybrain' ? " (Fly Brain)" : " (AI)") : "";
     statusElement.textContent = `${currentPlayer}${playerType}'s turn`;
     statusElement.style.color = '#03dc03';
 
     if (chessBoard.isInCheck(chessBoard.whiteToMove)) {
       infoElement.textContent = 'Check!';
       infoElement.style.color = '#dc0303';
-    } else if (isAI && aiThinking) {
+    } else if (isAI && aiEngine === 'flybrain' && pendingFlyThink) {
+      infoElement.textContent = 'The fly brain is thinking...';
+      infoElement.style.color = '#a7a7a7';
+    } else if (isAI && aiEngine === 'minimax' && aiThinking) {
       infoElement.textContent = 'AI is thinking...';
       infoElement.style.color = '#a7a7a7';
     } else {
@@ -348,11 +583,14 @@ function updateMoveHistory() {
 function resetGame() {
   chessBoard = new ChessBoard();
   aiThinking = false;
+  pendingFlyThink = null;
+  if (flyView) flyView.idle();
   updateGameStatus();
   updateMoveHistory();
 }
 
 function undoMove() {
+  if (pendingFlyThink) return;
   if (chessBoard.undoMove()) {
     updateGameStatus();
     updateMoveHistory();
@@ -368,5 +606,6 @@ function windowResized() {
   boardSize = canvasSize * 0.9;
   squareSize = boardSize / 8;
 
-  resizeCanvas(canvasSize, canvasSize);
+  resizeCanvas(canvasSize, canvasHeight());
+  if (flyView) flyView.resize(0, canvasSize, canvasSize, FLY_PANEL_HEIGHT);
 }
